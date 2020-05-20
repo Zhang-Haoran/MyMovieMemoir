@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--navigation menu options-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/homeScreen"
+        android:title="Home Screen" />
+    <item android:id="@+id/movieSearch"
+        android:title="Movie Search" />
+    <item android:id="@+id/movieView"
+        android:title="Movie View" />
+    <item android:id="@+id/watchlist"
+        android:title="Watchlist" />
+    <item android:id="@+id/addToMemoir"
+        android:title="Add To Memoir" />
+    <item android:id="@+id/movieMemoir"
+        android:title="Movie Memoir" />
+    <item android:id="@+id/report"
+        android:title="Report" />
+    <item android:id="@+id/map"
+        android:title="Map" />
+    <item android:id="@+id/advancedFeatures"
+        android:title="Advanced Features" />
+
+</menu>
