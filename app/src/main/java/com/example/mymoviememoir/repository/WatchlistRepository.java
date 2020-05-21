@@ -80,6 +80,14 @@ public class WatchlistRepository {
         });
         return watchlist;
     }
+    public void updateWatchlistByID(final int id,final String movieName, final String releaseDate,final String addingDate){
+        WatchlistDatabase.databaseWriteExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                dao.updateByID(id,movieName,releaseDate,addingDate);
+            }
+        });
+    }
 
     private void setWatchlist(Watchlist Watchlist) {
         this.watchlist = watchlist;

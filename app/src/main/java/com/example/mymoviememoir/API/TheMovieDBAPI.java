@@ -50,7 +50,11 @@ public class TheMovieDBAPI {
                 for (int i = 0; i < 10; i++){
                     JSONObject object = (JSONObject) jsonArray.get(i);
                     snippet.add(object.getString("title"));
-                    snippet.add(object.getString("release_date"));
+                    try {
+                        snippet.add(object.getString("release_date"));
+                    } catch (JSONException e) {
+                        snippet.add("not release");
+                    }
                     snippet.add(object.getString("poster_path"));
                     snippet.add(object.getString("id"));
                 }
@@ -59,7 +63,11 @@ public class TheMovieDBAPI {
                 for (int i = 0; i< jsonArray.length();i++){
                     JSONObject object = (JSONObject) jsonArray.get(i);
                     snippet.add(object.getString("title"));
-                    snippet.add(object.getString("release_date"));
+                    try {
+                        snippet.add(object.getString("release_date"));
+                    } catch (JSONException e) {
+                        snippet.add("not release");
+                    }
                     snippet.add(object.getString("poster_path"));
                     snippet.add(object.getString("id"));
                 }

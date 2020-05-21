@@ -18,6 +18,9 @@ import static androidx.room.OnConflictStrategy.REPLACE;
         @Query("SELECT * FROM Watchlist")
         LiveData<List<Watchlist>> getAll();
 
+        @Query("UPDATE watchlist SET movieName = :movieName,releaseDate = :releaseDate,addingDate = :addingDate where uid = :uid")
+        void updateByID(int uid,String movieName,String releaseDate,String addingDate);
+
         @Query("SELECT * FROM Watchlist WHERE uid = :watchlistId LIMIT 1")
         Watchlist findByID(int watchlistId);
 
