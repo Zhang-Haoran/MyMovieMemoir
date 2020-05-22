@@ -43,7 +43,7 @@ public class RestClient {
         URL url = null;
         HttpURLConnection httpURLConnection = null;
         try{
-            url = new URL(Signin.BASE_URL + methodPath);
+            url = new URL(BASE_URL + methodPath);
             httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setReadTimeout(10000);
             httpURLConnection.setConnectTimeout(15000);
