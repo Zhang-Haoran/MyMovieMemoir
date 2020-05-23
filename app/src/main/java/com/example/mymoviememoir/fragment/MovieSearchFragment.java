@@ -39,7 +39,7 @@ public class MovieSearchFragment extends Fragment {
     private List<HashMap<String,Object>> movieSearchList = new ArrayList<>();
     ListView movieListView;
     List<String> resultList;
-    Bitmap bitmap;
+
 
     public MovieSearchFragment(){
 
@@ -90,6 +90,7 @@ public class MovieSearchFragment extends Fragment {
                     map.put("Release Date",resultList.get(i+1));
                     String imgURL = "https://image.tmdb.org/t/p/w600_and_h900_bestv2/" + resultList.get(i+2);
                     map.put("movieID",resultList.get(i+3));
+                    Bitmap bitmap;
                     try {
                         URL url = new URL(imgURL);
                         InputStream inputStream = url.openStream();
@@ -128,11 +129,11 @@ public class MovieSearchFragment extends Fragment {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         String movieID = movieSearchList.get(position).get("movieID").toString();
                         String movieName = movieSearchList.get(position).get("Movie Name").toString();
+
                         Fragment fragment = new MovieViewFragment();
                         Bundle bundle = new Bundle();
                         bundle.putString("movieID",movieID);
                         bundle.putString("movieName",movieName);
-                        bundle.putParcelable("bitmap",bitmap);
 
                         fragment.setArguments(bundle);
                         FragmentManager fragmentManager = getFragmentManager();

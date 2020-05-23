@@ -31,6 +31,9 @@ public class WatchlistFragment extends Fragment {
     TextView textView_delete;
     TextView textView_update;
     WatchlistViewModel watchlistViewModel;
+    private String movieID;
+    private String movieName;
+    private String releaseDate;
     public WatchlistFragment(){
 
     }
@@ -47,6 +50,12 @@ public class WatchlistFragment extends Fragment {
         textView_read = view.findViewById(R.id.textView_read);
         textView_delete = view.findViewById(R.id.textView_delete);
         textView_update = view.findViewById(R.id.textView_update);
+        Bundle bundle = getArguments();
+        movieID = bundle.getString("movieID");
+        movieName = bundle.getString("movieName");
+        releaseDate = bundle.getString("releaseDate");
+
+
         watchlistViewModel = new ViewModelProvider(this).get(WatchlistViewModel.class);
         watchlistViewModel.initializeVars(getActivity().getApplication());
         watchlistViewModel.getAllWatchlist().observe(this, new Observer<List<Watchlist>>() {

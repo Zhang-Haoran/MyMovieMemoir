@@ -1,5 +1,6 @@
 package com.example.mymoviememoir.fragment;
 
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -21,6 +22,7 @@ public class MovieViewFragment extends Fragment {
     private TextView textView;
     private String movieID;
     private String movieName;
+    private Bitmap bitmap;
     TextView mvreleasedate;
     TextView mvgenre;
     TextView cast;
@@ -49,6 +51,7 @@ public class MovieViewFragment extends Fragment {
         Bundle bundle = getArguments();
         movieID = bundle.getString("movieID");
         movieName = bundle.getString("movieName");
+
         mvmoviename.setText(movieName);
         new AsyncMovieDetail().execute(movieID);
 
@@ -75,6 +78,7 @@ public class MovieViewFragment extends Fragment {
                 bundle.putString("movieID",movieID);
                 bundle.putString("movieName",movieName);
                 bundle.putString("releaseDate",mvreleasedate.getText().toString());
+
                 Fragment fragment = new AddToMemoirFragment();
                 fragment.setArguments(bundle);
                 FragmentManager fragmentManager = getFragmentManager();
