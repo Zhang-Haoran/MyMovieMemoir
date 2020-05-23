@@ -44,7 +44,7 @@ public class MovieSearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.moviesearch_fragment,container,false);
         textView = view.findViewById(R.id.moviesearchTextView);
-        textView.setText("This is Movie Search Screen");
+        textView.setText("Movie Search Screen");
         Button searchButton = view.findViewById(R.id.searchButton);
         final EditText searchInputField = view.findViewById(R.id.searchInputField);
         movieListView = view.findViewById(R.id.movieListView);

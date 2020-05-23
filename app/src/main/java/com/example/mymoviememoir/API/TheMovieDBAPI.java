@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class TheMovieDBAPI {
     private static final String apiKey = "78324a2485620d39b0d6d391ac0573e6";
-
+//connect to the search movie api
     public static String searchMovie(String searchInput){
         searchInput = searchInput.trim().replace(" ","%20");
 
@@ -40,26 +40,12 @@ public class TheMovieDBAPI {
         }
         return result;
     }
-
+//get the data for searched movie
     public static List<String> getSnippet(String result){
         List<String> snippet = new ArrayList<>();
         try{
             JSONObject jsonObject = new JSONObject(result);
             JSONArray jsonArray = new JSONArray(jsonObject.getString("results"));
-            if (jsonArray.length()>10){
-                for (int i = 0; i < 10; i++){
-                    JSONObject object = (JSONObject) jsonArray.get(i);
-                    snippet.add(object.getString("title"));
-                    try {
-                        snippet.add(object.getString("release_date"));
-                    } catch (JSONException e) {
-                        snippet.add("not release");
-                    }
-                    snippet.add(object.getString("poster_path"));
-                    snippet.add(object.getString("id"));
-                }
-            }
-            else {
                 for (int i = 0; i< jsonArray.length();i++){
                     JSONObject object = (JSONObject) jsonArray.get(i);
                     snippet.add(object.getString("title"));
@@ -70,14 +56,13 @@ public class TheMovieDBAPI {
                     }
                     snippet.add(object.getString("poster_path"));
                     snippet.add(object.getString("id"));
-                }
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
         return snippet;
     }
-
+//connect the movie detail api
     public static String getMovieDetail(String movieID){
         URL url = null;
         HttpURLConnection httpURLConnection = null;
@@ -103,7 +88,7 @@ public class TheMovieDBAPI {
         }
         return result;
     }
-
+//get movie detail information as required
     public static List<String> getDetails(String result){
         List<String> details = new ArrayList<>();
 
@@ -124,7 +109,7 @@ public class TheMovieDBAPI {
         }
         return details;
     }
-
+//get credit data which store cast and director
     public static String getCredit(String movieID){
         URL url = null;
         HttpURLConnection httpURLConnection = null;
@@ -151,7 +136,7 @@ public class TheMovieDBAPI {
         return result;
     }
 
-
+//get cast from the Movie DB api in credit
     public static List<String> getCast(String result){
         List<String> details = new ArrayList<>();
 
@@ -167,7 +152,7 @@ public class TheMovieDBAPI {
         }
         return details;
     }
-
+//get direct name from the Movie DB api in credit
     public static List<String> getDirector(String result){
         List<String> details = new ArrayList<>();
 

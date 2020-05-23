@@ -15,16 +15,26 @@
         android:textSize="25dp"
         android:textStyle="bold" />
 
+
     <TextView
-        android:id="@+id/nameTextView"
+        android:id="@+id/dateLabel"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="Current Date: "
+        android:layout_marginTop="20dp"/>
 
     <TextView
         android:id="@+id/dateTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="xx-xx-xxxx" />
+
+    <TextView
+        android:id="@+id/topFiveLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Top movie (Name/ Release Date/ Score):"
+        android:layout_marginTop="20dp"/>
 
     <ListView
         android:id="@+id/top5MovieListView"

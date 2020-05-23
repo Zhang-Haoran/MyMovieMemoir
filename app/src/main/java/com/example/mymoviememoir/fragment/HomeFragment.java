@@ -40,17 +40,15 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home_fragment,container,false);
         textView = view.findViewById(R.id.homeTextView);
-        textView.setText("This is Home Screen");
         Intent intent = getActivity().getIntent();
         Bundle bundle = intent.getExtras();
         nameOfUser = bundle.getString("nameOfUser");
         userid = bundle.getInt("userid");
-        TextView nameTextView = view.findViewById(R.id.nameTextView);
         TextView dateTextView = view.findViewById(R.id.dateTextView);
         movieListView = view.findViewById(R.id.top5MovieListView);
         new AsyncGetTop5Movie().execute();
     //welcome the user and show the current data time
-        nameTextView.setText("Welcome "+ nameOfUser);
+        textView.setText("Welcome "+ nameOfUser);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Date date = new Date(System.currentTimeMillis());
         dateTextView.setText(simpleDateFormat.format(date));

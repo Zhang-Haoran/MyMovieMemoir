@@ -18,6 +18,6 @@ public class MapFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.map_fragment,container,false);
         textView = view.findViewById(R.id.mapTextView);
-        textView.setText("This is Map Screen");
+        textView.setText("Map Screen");
         return view;    }
 }

@@ -18,6 +18,6 @@ public class ReportFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.report_fragment,container,false);
         textView = view.findViewById(R.id.reportTextView);
-        textView.setText("This is Report Screen");
+        textView.setText("Report Screen");
         return view;    }
 }

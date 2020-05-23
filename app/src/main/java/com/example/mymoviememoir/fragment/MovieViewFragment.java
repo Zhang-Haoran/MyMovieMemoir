@@ -35,7 +35,7 @@ public class MovieViewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.movieview_fragment,container,false);
         textView = view.findViewById(R.id.movieviewTextView);
-        textView.setText("This is Movie View Screen");
+        textView.setText("Movie View Screen");
         TextView mvmoviename = view.findViewById(R.id.mvmoviename);
         mvreleasedate = view.findViewById(R.id.mvreleasedate);
         mvgenre = view.findViewById(R.id.mvgenre);

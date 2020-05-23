@@ -71,15 +71,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.movieSearch:
                 replaceFragment(new MovieSearchFragment());
                 break;
-            case R.id.movieView:
-                replaceFragment(new MovieViewFragment());
-                break;
+//            case R.id.movieView:
+//                replaceFragment(new MovieViewFragment());
+//                break;
             case R.id.watchlist:
                 replaceFragment(new WatchlistFragment());
                 break;
-            case R.id.addToMemoir:
-                replaceFragment(new AddToMemoirFragment());
-                break;
+//            case R.id.addToMemoir:
+//                replaceFragment(new AddToMemoirFragment());
+//                break;
             case R.id.movieMemoir:
                 replaceFragment(new MovieMemoirFragment());
                 break;
@@ -89,9 +89,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.map:
                 replaceFragment(new MapFragment());
                 break;
-            case R.id.advancedFeatures:
-                replaceFragment(new AdvancedFeatureFragment());
-                break;
+//            case R.id.advancedFeatures:
+//                replaceFragment(new AdvancedFeatureFragment());
+//                break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;

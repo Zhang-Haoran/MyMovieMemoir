@@ -18,6 +18,6 @@ public class AdvancedFeatureFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.advancedfeature_fragment,container,false);
         textView = view.findViewById(R.id.advancedfeaturesTextView);
-        textView.setText("This is Advanced Features Screen");
+        textView.setText("Advanced Features Screen");
         return view;    }
 }

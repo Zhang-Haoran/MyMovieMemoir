@@ -37,7 +37,7 @@ public class WatchlistFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.watchlist_fragment,container,false);
         textView = view.findViewById(R.id.watchlistTextView);
-        textView.setText("This is Watchlist Screen");
+        textView.setText("Watchlist Screen");
 
         Button addButton = view.findViewById(R.id.addButton);
         Button deleteButton = view.findViewById(R.id.deleteButton);

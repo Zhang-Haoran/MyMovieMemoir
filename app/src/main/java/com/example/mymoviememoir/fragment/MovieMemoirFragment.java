@@ -26,7 +26,7 @@ public class MovieMemoirFragment extends Fragment {
         textView = view.findViewById(R.id.moviememoirTextView);
         findResultTextView = view.findViewById(R.id.findResultTextView);
         Button findAllMemoirButton = view.findViewById(R.id.findAllMemoirButton);
-        textView.setText("This is Movie Memoir Screen");
+        textView.setText("Movie Memoir Screen");
         findAllMemoirButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
