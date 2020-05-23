@@ -75,14 +75,14 @@ public class RestClient {
     public static String findAllUsername(){
         return getMethod("fit5046assignment1.credentialstable/findByAllUsername/","");
     }
-
+//post data into user table
     public static void postUsertable(Usertable usertable){
         Gson gson = new Gson();
         String usertableJson = gson.toJson(usertable);
         postMethod("fit5046assignment1.usertable/",usertableJson);
 
     }
-
+//post data into credentials table
     public static void postcredentialstable(Credentialstable credentialstable){
         Gson gson = new Gson();
         String credentialstableJson = gson.toJson(credentialstable);
