@@ -5,10 +5,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewOutlineProvider;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.mymoviememoir.API.TheMovieDBAPI;
 import com.example.mymoviememoir.R;
@@ -50,6 +51,36 @@ public class MovieViewFragment extends Fragment {
         movieName = bundle.getString("movieName");
         mvmoviename.setText(movieName);
         new AsyncMovieDetail().execute(movieID);
+
+        Button addToWatchlistButton = view.findViewById(R.id.addToWatchlist);
+        Button addToMovieMemoir = view.findViewById(R.id.addToMemoir);
+        addToWatchlistButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("movieID",movieID);
+                bundle.putString("movieName",movieName);
+                bundle.putString("releaseDate",mvreleasedate.getText().toString());
+                Fragment fragment = new WatchlistFragment();
+                fragment.setArguments(bundle);
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.content_frame,fragment).commit();
+            }
+        });
+
+        addToMovieMemoir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("movieID",movieID);
+                bundle.putString("movieName",movieName);
+                bundle.putString("releaseDate",mvreleasedate.getText().toString());
+                Fragment fragment = new AddToMemoirFragment();
+                fragment.setArguments(bundle);
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.content_frame,fragment).commit();
+            }
+        });
 
 
 
@@ -121,7 +152,11 @@ public class MovieViewFragment extends Fragment {
                     allCast.add(s);
                 }
                 cast.setText(allCast.toString().replace("[","").replace("]",""));
-                director.setText(resultList3.get(0));
+                ArrayList<String> allDirectors = new ArrayList<>();
+                for (String s: resultList2){
+                    allDirectors.add(s);
+                }
+                director.setText(allDirectors.toString().replace("[","").replace("]",""));
 
             }
         }
