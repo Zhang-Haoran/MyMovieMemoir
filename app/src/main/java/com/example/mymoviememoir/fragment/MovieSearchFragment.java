@@ -102,9 +102,9 @@ public class MovieSearchFragment extends Fragment {
 
                     public boolean setViewValue(View view, Object data, String textRepresentation) {
                         if((view instanceof ImageView) & (data instanceof Bitmap) ) {
-                            ImageView iv = (ImageView) view;
-                            Bitmap bm = (Bitmap) data;
-                            iv.setImageBitmap(bm);
+                            ImageView imageView = (ImageView) view;
+                            Bitmap bitmap = (Bitmap) data;
+                            imageView.setImageBitmap(bitmap);
                             return true;
                         }
                         return false;
@@ -123,11 +123,11 @@ public class MovieSearchFragment extends Fragment {
                         String movieID = movieSearchList.get(position).get("movieID").toString();
                         String movieName = movieSearchList.get(position).get("Movie Name").toString();
                         Fragment fragment = new MovieViewFragment();
-                        Bundle args = new Bundle();
-                        args.putString("movieID",movieID);
-                        args.putString("movieName",movieName);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("movieID",movieID);
+                        bundle.putString("movieName",movieName);
 
-                        fragment.setArguments(args);
+                        fragment.setArguments(bundle);
                         FragmentManager fragmentManager = getFragmentManager();
                         fragmentManager.beginTransaction().replace(R.id.content_frame,fragment).commit();
                     }
