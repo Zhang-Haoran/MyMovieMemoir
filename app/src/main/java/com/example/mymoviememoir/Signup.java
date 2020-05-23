@@ -260,7 +260,7 @@ public class Signup extends AppCompatActivity {
             credentialstable.setCredentialsid(usertable.getUserid());//set credentials id = user id for convenience
             credentialstable.setUserid(usertable);
             credentialstable.setUsername(etMap.get("emailInputField").getText().toString());
-            credentialstable.setPasswordhash(etMap.get("passwordInputField").getText().toString());
+            credentialstable.setPasswordhash(Signin.md5(etMap.get("passwordInputField").getText().toString()));
             credentialstable.setSignupdate(signupDate);
             new AsyncPostCredentialstable().execute(credentialstable);
         }

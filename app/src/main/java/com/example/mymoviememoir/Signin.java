@@ -16,6 +16,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public class Signin extends AppCompatActivity {
 
     private EditText userName;
@@ -53,7 +56,7 @@ public class Signin extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
             String username = strings[0];
-            String password = strings[1];
+            String password = md5(strings[1]);
             return RestClient.findByUsernameAndPassword(username,password);
         }
 
@@ -86,5 +89,30 @@ public class Signin extends AppCompatActivity {
                 startActivity(intent);
             }
         }
+    }
+
+    public static String md5(final String s) {
+        final String MD5 = "MD5";
+        try {
+            // Create MD5 Hash
+            MessageDigest digest = MessageDigest
+                    .getInstance(MD5);
+            digest.update(s.getBytes());
+            byte messageDigest[] = digest.digest();
+
+            // Create Hex String
+            StringBuilder hexString = new StringBuilder();
+            for (byte aMessageDigest : messageDigest) {
+                String h = Integer.toHexString(0xFF & aMessageDigest);
+                while (h.length() < 2)
+                    h = "0" + h;
+                hexString.append(h);
+            }
+            return hexString.toString();
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 }
