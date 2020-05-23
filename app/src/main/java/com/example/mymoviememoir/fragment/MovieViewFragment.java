@@ -16,6 +16,8 @@ import com.example.mymoviememoir.API.TheMovieDBAPI;
 import com.example.mymoviememoir.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class MovieViewFragment extends Fragment {
@@ -51,6 +53,7 @@ public class MovieViewFragment extends Fragment {
         Bundle bundle = getArguments();
         movieID = bundle.getString("movieID");
         movieName = bundle.getString("movieName");
+        bitmap = bundle.getParcelable("Image");
 
         mvmoviename.setText(movieName);
         new AsyncMovieDetail().execute(movieID);
@@ -61,9 +64,11 @@ public class MovieViewFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
+                Date currentTime = Calendar.getInstance().getTime();
                 bundle.putString("movieID",movieID);
                 bundle.putString("movieName",movieName);
                 bundle.putString("releaseDate",mvreleasedate.getText().toString());
+                bundle.putString("currentTime",currentTime.toString());
                 Fragment fragment = new WatchlistFragment();
                 fragment.setArguments(bundle);
                 FragmentManager fragmentManager = getFragmentManager();
@@ -78,6 +83,7 @@ public class MovieViewFragment extends Fragment {
                 bundle.putString("movieID",movieID);
                 bundle.putString("movieName",movieName);
                 bundle.putString("releaseDate",mvreleasedate.getText().toString());
+                bundle.putParcelable("Image",bitmap);
 
                 Fragment fragment = new AddToMemoirFragment();
                 fragment.setArguments(bundle);

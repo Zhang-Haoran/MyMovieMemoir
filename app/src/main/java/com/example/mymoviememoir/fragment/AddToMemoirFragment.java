@@ -19,5 +19,6 @@ public class AddToMemoirFragment extends Fragment {
         View view = inflater.inflate(R.layout.addtomemoir_fragment,container,false);
         textView = view.findViewById(R.id.addtomemoirTextView);
         textView.setText("Add To Memoir Screen");
+
         return view;    }
 }

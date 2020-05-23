@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Movie;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -117,6 +118,7 @@ public class MovieSearchFragment extends Fragment {
                         return false;
                     }
                 });
+
                 return movieListAdapter;
             }
 
@@ -129,11 +131,12 @@ public class MovieSearchFragment extends Fragment {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         String movieID = movieSearchList.get(position).get("movieID").toString();
                         String movieName = movieSearchList.get(position).get("Movie Name").toString();
-
+                        Object bitmap = movieSearchList.get(position).get("Image");
                         Fragment fragment = new MovieViewFragment();
                         Bundle bundle = new Bundle();
                         bundle.putString("movieID",movieID);
                         bundle.putString("movieName",movieName);
+                        bundle.putParcelable("Image", (Parcelable) bitmap);
 
                         fragment.setArguments(bundle);
                         FragmentManager fragmentManager = getFragmentManager();

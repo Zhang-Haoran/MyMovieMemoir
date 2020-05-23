@@ -1,11 +1,14 @@
 package com.example.mymoviememoir.fragment;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -19,6 +22,7 @@ import com.example.mymoviememoir.viewmodel.WatchlistViewModel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class WatchlistFragment extends Fragment {
@@ -34,6 +38,8 @@ public class WatchlistFragment extends Fragment {
     private String movieID;
     private String movieName;
     private String releaseDate;
+    private String addingDatetime;
+    private HashMap<String,String> movieHashmap = new HashMap<>();
     public WatchlistFragment(){
 
     }
@@ -41,7 +47,7 @@ public class WatchlistFragment extends Fragment {
         View view = inflater.inflate(R.layout.watchlist_fragment,container,false);
         textView = view.findViewById(R.id.watchlistTextView);
         textView.setText("Watchlist Screen");
-
+        ListView watchlistListView;
         Button addButton = view.findViewById(R.id.addButton);
         Button deleteButton = view.findViewById(R.id.deleteButton);
         Button updateButton = view.findViewById(R.id.updateButton);
@@ -54,7 +60,15 @@ public class WatchlistFragment extends Fragment {
         movieID = bundle.getString("movieID");
         movieName = bundle.getString("movieName");
         releaseDate = bundle.getString("releaseDate");
-
+        addingDatetime = bundle.getString("currentTime");
+        movieHashmap.put("movieName",movieName);
+        movieHashmap.put("releaseDate",releaseDate);
+        movieHashmap.put("currentTime",addingDatetime);
+//新传来的数据如何和原来的数据中和在一起
+//        String[] colHEAD = new String[]{"movie Name","release Date","currentTime"};
+//        int[] dataCell = new int[]{R.id.wmovieName,R.id.wreleaseDate,R.id.addingDate};
+//        SimpleAdapter movieListAdapter = new SimpleAdapter(WatchlistFragment.this.getActivity(),movieHashmap,R.layout.list_view_watchlist,colHEAD,dataCell);
+//        movieListView.setAdapter(movieListAdapter);
 
         watchlistViewModel = new ViewModelProvider(this).get(WatchlistViewModel.class);
         watchlistViewModel.initializeVars(getActivity().getApplication());
