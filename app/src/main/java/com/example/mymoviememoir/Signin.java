@@ -89,7 +89,7 @@ public class Signin extends AppCompatActivity {
             }
         }
     }
-
+    //use md5 to hash the password
     public static String md5(final String s) {
         final String MD5 = "MD5";
         try {

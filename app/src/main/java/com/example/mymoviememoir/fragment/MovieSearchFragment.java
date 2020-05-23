@@ -56,7 +56,7 @@ public class MovieSearchFragment extends Fragment {
             }
         });
         return view;    }
-
+        //search move from API
         private class AsyncSearch extends AsyncTask<String,Void,String>{
 
             @Override
@@ -70,6 +70,8 @@ public class MovieSearchFragment extends Fragment {
                 new AsyncSearchResult().execute(result);
             }
         }
+
+        //pass the search result into list view
         private class AsyncSearchResult extends AsyncTask<String,Void, SimpleAdapter>{
 
             @Override

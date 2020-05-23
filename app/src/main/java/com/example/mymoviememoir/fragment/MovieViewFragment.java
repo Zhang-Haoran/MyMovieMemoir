@@ -53,7 +53,7 @@ public class MovieViewFragment extends Fragment {
 
 
         return view;    }
-
+//get movie detail from the movieDB api which is movie detail api
         private class AsyncMovieDetail extends AsyncTask<String,Void,String>{
 
             @Override
@@ -67,7 +67,7 @@ public class MovieViewFragment extends Fragment {
                 new AsnycGetDetail().execute(result);
             }
         }
-
+//get the target data and pass them into view
         private class AsnycGetDetail extends AsyncTask<String, Void, Void> {
 
             @Override
@@ -88,7 +88,7 @@ public class MovieViewFragment extends Fragment {
                 new AsyncGetCredit().execute(movieID);
             }
         }
-
+//cast and director are in the different api section which is credit api
         private class AsyncGetCredit extends AsyncTask<String,Void,String>{
 
             @Override
@@ -102,7 +102,7 @@ public class MovieViewFragment extends Fragment {
                 new AsyncGetCastAndDirector().execute(s);
             }
         }
-
+//get the target data and pass them into view
         private class AsyncGetCastAndDirector extends AsyncTask<String,Void,Void>{
 
             @Override

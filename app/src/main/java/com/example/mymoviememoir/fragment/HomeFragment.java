@@ -49,7 +49,7 @@ public class HomeFragment extends Fragment {
         TextView dateTextView = view.findViewById(R.id.dateTextView);
         movieListView = view.findViewById(R.id.top5MovieListView);
         new AsyncGetTop5Movie().execute();
-
+    //welcome the user and show the current data time
         nameTextView.setText("Welcome "+ nameOfUser);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Date date = new Date(System.currentTimeMillis());
@@ -58,7 +58,7 @@ public class HomeFragment extends Fragment {
 
         return view;
     }
-
+    // retrieve the first top five movie based on assignment 1 task 4 d
     private class AsyncGetTop5Movie extends AsyncTask<String,Void,String>{
 
         @Override
