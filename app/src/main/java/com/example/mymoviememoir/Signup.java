@@ -189,7 +189,7 @@ public class Signup extends AppCompatActivity {
             String result = "";
             //Making HTTP request
             try {
-                url = new URL(Signin.BASE_URL + methodPath);
+                url = new URL(RestClient.BASE_URL + methodPath);
                 //open the connection
                 conn = (HttpURLConnection) url.openConnection();
                 //set the timeout

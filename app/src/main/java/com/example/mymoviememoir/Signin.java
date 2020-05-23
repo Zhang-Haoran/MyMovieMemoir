@@ -25,7 +25,6 @@ public class Signin extends AppCompatActivity {
     private EditText password;
     private String nameOfUser;
     private int userid;
-    public static final String BASE_URL = "http://192.168.1.103:8080/FIT5046Assignment1/webresources/";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

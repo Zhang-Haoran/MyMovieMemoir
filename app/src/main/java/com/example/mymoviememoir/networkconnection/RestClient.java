@@ -11,7 +11,7 @@ import java.net.URL;
 import java.util.Scanner;
 
 public class RestClient {
-    private static final String BASE_URL = "http://192.168.1.103:8080/FIT5046Assignment1/webresources/";
+    public static final String BASE_URL = "http://192.168.1.103:8080/FIT5046Assignment1/webresources/";
 
     private static String getMethod(String methodPath, String parameterInput){
         URL url = null;
