@@ -18,14 +18,15 @@
 
     <TextView
         android:id="@+id/releaseYear"
-        android:layout_width="33dp"
+        android:layout_width="31dp"
         android:layout_height="119dp"
         android:layout_weight="1" />
 
     <TextView
         android:id="@+id/movieid"
-        android:layout_width="33dp"
+        android:layout_width="wrap_content"
         android:layout_height="119dp"
         android:layout_weight="1"
         android:visibility="invisible" />
+
 </LinearLayout>

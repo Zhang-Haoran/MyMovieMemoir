@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,6 +23,8 @@ import java.security.NoSuchAlgorithmException;
 
 public class Signin extends AppCompatActivity {
 
+    private String userInputUsername;
+    private String userInputPassword;
     private EditText userName;
     private EditText password;
     private String nameOfUser;
@@ -33,11 +37,20 @@ public class Signin extends AppCompatActivity {
         Button signupButton = findViewById(R.id.signupButton);
         userName = findViewById(R.id.usernameInputField);
         password = findViewById(R.id.passwordInputField);
-
         signinButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new AsyncSignin().execute(userName.getText().toString(),password.getText().toString());
+                userInputUsername = userName.getText().toString();
+                userInputPassword = password.getText().toString();
+                //signin button validation
+                if (userInputUsername.isEmpty()){
+                    userName.setError("username input can not be empty");
+                    Toast.makeText(Signin.this,"Please check your username",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    new AsyncSignin().execute(userInputUsername,userInputPassword);
+                }
+
             }
         });
 
@@ -62,12 +75,14 @@ public class Signin extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
+            //if the given username and password cannot find a pair in database return []. therefore, to check them here.
             if (result.equals("[]") || result.equals("")){
                 Toast.makeText(Signin.this,"Incorrect username or password",Toast.LENGTH_SHORT).show();
 
             }
             else {
                 try {
+                    //get username and userid pass it to home
                     JSONArray jsonArray = new JSONArray(result);
                     for (int i = 0; i< jsonArray.length();i++){
                         JSONObject jsonObject = (JSONObject) jsonArray.get(i);
@@ -79,7 +94,7 @@ public class Signin extends AppCompatActivity {
                 catch (JSONException e){
                     e.printStackTrace();
                 }
-
+                //pass value to home
                 Intent intent = new Intent(Signin.this,MainActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("nameOfUser", nameOfUser);

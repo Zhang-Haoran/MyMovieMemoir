@@ -47,7 +47,6 @@ public class Signup extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-
         Button signupButtton = findViewById(R.id.signinConfirmButton);
         Button datetimePickerButton = findViewById(R.id.dobPickerButton);
         //hashmap key value pair
@@ -57,10 +56,31 @@ public class Signup extends AppCompatActivity {
         etMap.put("surnameInputField",(EditText) findViewById(R.id.surnameInputField));
         etMap.put("addressInputField",(EditText) findViewById(R.id.addressInputField));
         etMap.put("postcodeInputField",(EditText) findViewById(R.id.postcodeInputField));
+        Calendar calendar = Calendar.getInstance();// get a calendar using the current time zone and locale of the system. For example today is 10/05/2020, it will get 10,4, 2020
+        final int calendarYear = calendar.get(Calendar.YEAR);
+        final int calendarMonth = calendar.get(Calendar.MONTH);// month from calendar starts from 0 end in 11. it needs to + 1 to represent current month
+        final int calendarDay = calendar.get(Calendar.DAY_OF_MONTH);
+        //Formatting date. add 0 at front for month or day which is too short to store into database. to store into database, we need to change 2020-1-1 to 2020-01-01
+        signupDate = dateFormatting(calendarYear,calendarMonth,calendarDay);
         final TextView datePickerResultTextView = findViewById(R.id.datepickerResultTextView);
         final Spinner stateSpinnerTextView = findViewById(R.id.stateSpinner);
         //get all the user name into a list to check if user input the existing username
         new AsyncGetUsername().execute();
+
+        //radio group
+        RadioGroup radioGroup = findViewById(R.id.genderRaidoGroup);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton radioButton = findViewById(checkedId);
+                if (radioButton.getText().equals("Male")){
+                    gender = "Male";
+                }
+                else {
+                    gender = "Female";
+                }
+            }
+        });
 
         //spinner
         List<String> list = new ArrayList<>(Arrays.asList("VIC","SA","TAS","WA","NT","QLD","NSW","ACT"));
@@ -79,32 +99,10 @@ public class Signup extends AppCompatActivity {
             }
         });
 
-        //radio group
-        RadioGroup radioGroup = findViewById(R.id.genderRaidoGroup);
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                RadioButton radioButton = findViewById(checkedId);
-                if (radioButton.getText().equals("Male")){
-                    gender = "Male";
-                }
-                else {
-                    gender = "Female";
-                }
-            }
-        });
-
         //date time picker
         datetimePickerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Calendar calendar = Calendar.getInstance();// get a calendar using the current time zone and locale of the system. For example today is 10/05/2020, it will get 10,4, 2020
-                int year = calendar.get(Calendar.YEAR);
-                int month = calendar.get(Calendar.MONTH);// month from calendar starts from 0 end in 11. it needs to + 1 to represent current month
-                int day = calendar.get(Calendar.DAY_OF_MONTH);
-                //Formatting date. add 0 at front for month or day which is too short to store into database. to store into database, we need to change 2020-1-1 to 2020-01-01
-                signupDate = dateFormatting(year,month,day);
-
                 //Day of birth
                 DatePickerDialog datePickerDialog = new DatePickerDialog(Signup.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
@@ -112,14 +110,12 @@ public class Signup extends AppCompatActivity {
                         DOB = dateFormatting(year,month,day);
                         datePickerResultTextView.setText(DOB);
                     }
-                },year,month,day); //set current day, month, year into datepicker
+                },calendarYear,calendarMonth,calendarDay); //set current day, month, year into datepicker
 
                 DatePicker dp = datePickerDialog.getDatePicker();//initialize datepicker to set max date, get the datetime that user picked
                 dp.setMaxDate(System.currentTimeMillis()); //dob is no more than current date
                 datePickerDialog.show();
             }
-
-
 
         });
 
@@ -128,23 +124,50 @@ public class Signup extends AppCompatActivity {
         signupButtton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean validation = true;
-                String newuserName = etMap.get("emailInputField").getText().toString();
-                //check if there is any username in the list is same as user's input
-                for (int i = 0; i < usernameList.size(); i++){
-                    if(newuserName.equals(usernameList.get(i))){ //check redundant username
-                        validation = false;
-                        etMap.get("emailInputField").setError("The username exists");
-                    }
+                boolean inputValidation = true;
+                String userInputUserName = etMap.get("emailInputField").getText().toString();
+                String userInputFirstName = etMap.get("firstnameInputField").getText().toString();
+                String userInputSurname = etMap.get("surnameInputField").getText().toString();
+                String userInputAddress = etMap.get("addressInputField").getText().toString();
+                String userInputPostcode = etMap.get("postcodeInputField").getText().toString();
 
+                //check if input is empty
+                if (userInputUserName.isEmpty()){
+                    etMap.get("emailInputField").setError("The username is empty");
+                    inputValidation = false;
                 }
-                if (validation){
+                if (userInputFirstName.isEmpty()){
+                    etMap.get("firstnameInputField").setError("The first name is empty");
+                    inputValidation = false;
+                }
+                if (userInputSurname.isEmpty()){
+                    etMap.get("surnameInputField").setError("The surname is empty");
+                    inputValidation = false;
+                }
+                if (userInputAddress.isEmpty()){
+                    etMap.get("addressInputField").setError("The address is empty");
+                    inputValidation = false;
+                }
+                if (userInputPostcode.isEmpty()){
+                    etMap.get("postcodeInputField").setError("The postcode is empty");
+                    inputValidation = false;
+                }
+
+                //check if there is any username in the list is same as user's input
+                for (int i = 0; i < usernameList.size(); i++) {
+                    if (userInputUserName.equals(usernameList.get(i))) { //check redundant username
+                        etMap.get("emailInputField").setError("The username exists");
+                        inputValidation = false;
+                    }
+                }
+                
+                if (inputValidation){
                     Usertable usertable = new Usertable();
                     usertable.setUserid(userCount+1);//the new userid should be current total number plus 1
-                    usertable.setName(etMap.get("firstnameInputField").getText().toString());
-                    usertable.setSurname(etMap.get("surnameInputField").getText().toString());
-                    usertable.setAddress(etMap.get("addressInputField").getText().toString());
-                    usertable.setPostcode(etMap.get("postcodeInputField").getText().toString());
+                    usertable.setName(userInputFirstName);
+                    usertable.setSurname(userInputSurname);
+                    usertable.setAddress(userInputAddress);
+                    usertable.setPostcode(userInputPostcode);
                     usertable.setDob(DOB);
                     usertable.setGender(gender);
                     usertable.setState(stateInput);

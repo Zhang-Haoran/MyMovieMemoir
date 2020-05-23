@@ -1,6 +1,5 @@
 package com.example.mymoviememoir.networkconnection;
 
-import com.example.mymoviememoir.Signin;
 import com.example.mymoviememoir.entity.Credentialstable;
 import com.example.mymoviememoir.entity.Usertable;
 import com.google.gson.Gson;
