@@ -49,13 +49,6 @@ public class Signup extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
         Button signupButtton = findViewById(R.id.signinConfirmButton);
         Button datetimePickerButton = findViewById(R.id.dobPickerButton);
-        //hashmap key value pair
-        etMap.put("emailInputField",(EditText) findViewById(R.id.emailInputField));
-        etMap.put("passwordInputField",(EditText) findViewById(R.id.passwordInputField));
-        etMap.put("firstnameInputField",(EditText) findViewById(R.id.firstnameInputField));
-        etMap.put("surnameInputField",(EditText) findViewById(R.id.surnameInputField));
-        etMap.put("addressInputField",(EditText) findViewById(R.id.addressInputField));
-        etMap.put("postcodeInputField",(EditText) findViewById(R.id.postcodeInputField));
         Calendar calendar = Calendar.getInstance();// get a calendar using the current time zone and locale of the system. For example today is 10/05/2020, it will get 10,4, 2020
         final int calendarYear = calendar.get(Calendar.YEAR);
         final int calendarMonth = calendar.get(Calendar.MONTH);// month from calendar starts from 0 end in 11. it needs to + 1 to represent current month
@@ -64,6 +57,14 @@ public class Signup extends AppCompatActivity {
         signupDate = dateFormatting(calendarYear,calendarMonth,calendarDay);
         final TextView datePickerResultTextView = findViewById(R.id.datepickerResultTextView);
         final Spinner stateSpinnerTextView = findViewById(R.id.stateSpinner);
+        //hashmap key value pair
+        etMap.put("emailInputField",(EditText) findViewById(R.id.emailInputField));
+        etMap.put("passwordInputField",(EditText) findViewById(R.id.passwordInputField));
+        etMap.put("firstnameInputField",(EditText) findViewById(R.id.firstnameInputField));
+        etMap.put("surnameInputField",(EditText) findViewById(R.id.surnameInputField));
+        etMap.put("addressInputField",(EditText) findViewById(R.id.addressInputField));
+        etMap.put("postcodeInputField",(EditText) findViewById(R.id.postcodeInputField));
+        
         //get all the user name into a list to check if user input the existing username
         new AsyncGetUsername().execute();
 
@@ -160,7 +161,7 @@ public class Signup extends AppCompatActivity {
                         inputValidation = false;
                     }
                 }
-                
+
                 if (inputValidation){
                     Usertable usertable = new Usertable();
                     usertable.setUserid(userCount+1);//the new userid should be current total number plus 1
