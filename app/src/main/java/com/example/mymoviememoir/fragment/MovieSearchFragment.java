@@ -3,6 +3,7 @@ package com.example.mymoviememoir.fragment;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Movie;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -52,6 +54,10 @@ public class MovieSearchFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 searchInput = searchInputField.getText().toString();
+                if (searchInput.isEmpty()){
+                    searchInputField.setError("search could not be empty");
+                    Toast.makeText(getActivity(),"please check your input of search",Toast.LENGTH_SHORT).show();
+                }
                 new AsyncSearch().execute(searchInput);
             }
         });

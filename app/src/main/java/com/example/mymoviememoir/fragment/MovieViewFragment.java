@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import com.example.mymoviememoir.API.TheMovieDBAPI;
 import com.example.mymoviememoir.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MovieViewFragment extends Fragment {
@@ -115,7 +116,11 @@ public class MovieViewFragment extends Fragment {
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-                cast.setText(resultList2.get(0));
+                ArrayList<String> allCast = new ArrayList<>();
+                for (String s: resultList2){
+                    allCast.add(s);
+                }
+                cast.setText(allCast.toString().replace("[","").replace("]",""));
                 director.setText(resultList3.get(0));
 
             }
