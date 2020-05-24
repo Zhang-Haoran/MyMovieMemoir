@@ -5,8 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -48,7 +46,7 @@ public class Signin extends AppCompatActivity {
                     Toast.makeText(Signin.this,"Please check your username",Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    new AsyncSignin().execute(userInputUsername,userInputPassword);
+                    new signinAsyncTask().execute(userInputUsername,userInputPassword);
                 }
 
             }
@@ -64,7 +62,7 @@ public class Signin extends AppCompatActivity {
 
     }
     //to avoid time consuming when user is waiting to have multiple thread
-    private class AsyncSignin extends AsyncTask<String,Void,String>{
+    private class signinAsyncTask extends AsyncTask<String,Void,String>{
         @Override
         protected String doInBackground(String... strings) {
             String username = strings[0];

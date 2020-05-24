@@ -46,7 +46,7 @@ public class HomeFragment extends Fragment {
         userid = bundle.getInt("userid");
         TextView dateTextView = view.findViewById(R.id.dateTextView);
         movieListView = view.findViewById(R.id.top5MovieListView);
-        new AsyncGetTop5Movie().execute();
+        new topFiveMovieAsyncTask().execute();
     //welcome the user and show the current data time
         textView.setText("Welcome "+ nameOfUser);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -57,7 +57,7 @@ public class HomeFragment extends Fragment {
         return view;
     }
     // retrieve the first top five movie based on assignment 1 task 4 d
-    private class AsyncGetTop5Movie extends AsyncTask<String,Void,String>{
+    private class topFiveMovieAsyncTask extends AsyncTask<String,Void,String>{
 
         @Override
         protected String doInBackground(String... strings) {

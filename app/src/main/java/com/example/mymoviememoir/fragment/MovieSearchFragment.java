@@ -1,9 +1,7 @@
 package com.example.mymoviememoir.fragment;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Movie;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -23,9 +21,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.mymoviememoir.API.TheMovieDBAPI;
-import com.example.mymoviememoir.MainActivity;
 import com.example.mymoviememoir.R;
-import com.example.mymoviememoir.Signin;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -60,12 +56,12 @@ public class MovieSearchFragment extends Fragment {
                     searchInputField.setError("search could not be empty");
                     Toast.makeText(getActivity(),"please check your input of search",Toast.LENGTH_SHORT).show();
                 }
-                new AsyncSearch().execute(searchInput);
+                new searchAsyncTask().execute(searchInput);
             }
         });
         return view;    }
         //search move from API
-        private class AsyncSearch extends AsyncTask<String,Void,String>{
+        private class searchAsyncTask extends AsyncTask<String,Void,String>{
 
             @Override
             protected String doInBackground(String... strings) {
@@ -75,12 +71,12 @@ public class MovieSearchFragment extends Fragment {
             @Override
             protected void onPostExecute(String result) {
                 super.onPostExecute(result);
-                new AsyncSearchResult().execute(result);
+                new searchResultAsyncTask().execute(result);
             }
         }
 
         //pass the search result into list view
-        private class AsyncSearchResult extends AsyncTask<String,Void, SimpleAdapter>{
+        private class searchResultAsyncTask extends AsyncTask<String,Void, SimpleAdapter>{
 
             @Override
             protected SimpleAdapter doInBackground(String... strings) {

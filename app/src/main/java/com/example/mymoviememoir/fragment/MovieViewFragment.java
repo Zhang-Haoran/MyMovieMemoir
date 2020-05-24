@@ -56,7 +56,7 @@ public class MovieViewFragment extends Fragment {
         bitmap = bundle.getParcelable("Image");
 
         mvmoviename.setText(movieName);
-        new AsyncMovieDetail().execute(movieID);
+        new movieDetailAsyncTask().execute(movieID);
 
         Button addToWatchlistButton = view.findViewById(R.id.addToWatchlist);
         Button addToMovieMemoir = view.findViewById(R.id.addToMemoir);
@@ -96,7 +96,7 @@ public class MovieViewFragment extends Fragment {
 
         return view;    }
 //get movie detail from the movieDB api which is movie detail api
-        private class AsyncMovieDetail extends AsyncTask<String,Void,String>{
+        private class movieDetailAsyncTask extends AsyncTask<String,Void,String>{
 
             @Override
             protected String doInBackground(String... strings) {
@@ -106,11 +106,11 @@ public class MovieViewFragment extends Fragment {
             @Override
             protected void onPostExecute(String result) {
                 super.onPostExecute(result);
-                new AsnycGetDetail().execute(result);
+                new getDetailAsyncTask().execute(result);
             }
         }
 //get the target data and pass them into view
-        private class AsnycGetDetail extends AsyncTask<String, Void, Void> {
+        private class getDetailAsyncTask extends AsyncTask<String, Void, Void> {
 
             @Override
             protected Void doInBackground(String... strings) {
@@ -127,11 +127,11 @@ public class MovieViewFragment extends Fragment {
                 mvreleasedate.setText(resultList.get(2));
                 summary.setText(resultList.get(3));
                 ratingScore.setText(resultList.get(4));
-                new AsyncGetCredit().execute(movieID);
+                new getCreditAsyncTask().execute(movieID);
             }
         }
 //cast and director are in the different api section which is credit api
-        private class AsyncGetCredit extends AsyncTask<String,Void,String>{
+        private class getCreditAsyncTask extends AsyncTask<String,Void,String>{
 
             @Override
             protected String doInBackground(String... strings) {
@@ -141,11 +141,11 @@ public class MovieViewFragment extends Fragment {
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
-                new AsyncGetCastAndDirector().execute(s);
+                new getCastAndDirectorAsyncTask().execute(s);
             }
         }
 //get the target data and pass them into view
-        private class AsyncGetCastAndDirector extends AsyncTask<String,Void,Void>{
+        private class getCastAndDirectorAsyncTask extends AsyncTask<String,Void,Void>{
 
             @Override
             protected Void doInBackground(String... strings) {

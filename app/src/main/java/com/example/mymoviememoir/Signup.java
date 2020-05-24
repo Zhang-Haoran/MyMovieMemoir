@@ -66,7 +66,7 @@ public class Signup extends AppCompatActivity {
         etMap.put("postcodeInputField",(EditText) findViewById(R.id.postcodeInputField));
         
         //get all the user name into a list to check if user input the existing username
-        new AsyncGetUsername().execute();
+        new getUsernameAsyncTask().execute();
 
         //radio group
         RadioGroup radioGroup = findViewById(R.id.genderRaidoGroup);
@@ -172,7 +172,7 @@ public class Signup extends AppCompatActivity {
                     usertable.setDob(DOB);
                     usertable.setGender(gender);
                     usertable.setState(stateInput);
-                    new AsyncPostUsertable().execute(usertable);//post the new usertable data into database
+                    new postUsertableAsyncTask().execute(usertable);//post the new usertable data into database
                     Intent intent = new Intent(Signup.this, Signin.class);
                     startActivity(intent);
                 }
@@ -203,7 +203,7 @@ public class Signup extends AppCompatActivity {
 
     //get current user id by counting the number of existing id
     //use AsyncTask to avoid time consuming when user is waiting to have multiple thread
-    private class AsyncCalculateCurrentUserid extends android.os.AsyncTask<Void,Void,String> {
+    private class calculateCurrentUseridAsynctTask extends android.os.AsyncTask<Void,Void,String> {
         @Override
         protected String doInBackground(Void...voids)  {
             final String methodPath = "fit5046assignment1.usertable/count/";
@@ -244,7 +244,7 @@ public class Signup extends AppCompatActivity {
     }
 
     //get all the username to check if user enter existing username. record all username into list
-    private class AsyncGetUsername extends android.os.AsyncTask<Void,Void,Void> {
+    private class getUsernameAsyncTask extends android.os.AsyncTask<Void,Void,Void> {
         @Override
         protected Void doInBackground(Void...voids)  {
             String result = RestClient.findAllUsername();
@@ -264,13 +264,13 @@ public class Signup extends AppCompatActivity {
         //to set asynctask order, put next asynctask in the post execute
         @Override
         protected void onPostExecute(Void nothing){
-            AsyncCalculateCurrentUserid asyncCalculateCurrentUserid = new AsyncCalculateCurrentUserid();
-            asyncCalculateCurrentUserid.execute();
+            calculateCurrentUseridAsynctTask calculateCurrentUseridAsynctTask = new calculateCurrentUseridAsynctTask();
+            calculateCurrentUseridAsynctTask.execute();
         }
     }
 
     //post new user data into database
-    private class AsyncPostUsertable extends android.os.AsyncTask<Usertable,Void,Usertable> {
+    private class postUsertableAsyncTask extends android.os.AsyncTask<Usertable,Void,Usertable> {
         @Override
         protected Usertable doInBackground(Usertable...usertables)  {
             RestClient.postUsertable(usertables[0]);
@@ -286,12 +286,12 @@ public class Signup extends AppCompatActivity {
             credentialstable.setUsername(etMap.get("emailInputField").getText().toString());
             credentialstable.setPasswordhash(Signin.md5(etMap.get("passwordInputField").getText().toString()));
             credentialstable.setSignupdate(signupDate);
-            new AsyncPostCredentialstable().execute(credentialstable);
+            new postCredentialstableAsyncTask().execute(credentialstable);
         }
     }
 
     //post new credentials data into database
-    private class AsyncPostCredentialstable extends android.os.AsyncTask<Credentialstable,Void,Void> {
+    private class postCredentialstableAsyncTask extends android.os.AsyncTask<Credentialstable,Void,Void> {
         @Override
         protected Void doInBackground(Credentialstable...credentialstables)  {
             RestClient.postcredentialstable(credentialstables[0]);
