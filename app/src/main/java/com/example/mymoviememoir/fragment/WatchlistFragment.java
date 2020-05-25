@@ -51,6 +51,7 @@ public class WatchlistFragment extends Fragment {
         Button addButton = view.findViewById(R.id.addButton);
         Button deleteButton = view.findViewById(R.id.deleteButton);
         Button updateButton = view.findViewById(R.id.updateButton);
+        Button viewButton = view.findViewById(R.id.viewButton);
         editText = view.findViewById(R.id.editText);
         textView_insert = view.findViewById(R.id.textView_add);
         textView_read = view.findViewById(R.id.textView_read);
@@ -61,14 +62,8 @@ public class WatchlistFragment extends Fragment {
         movieName = bundle.getString("movieName");
         releaseDate = bundle.getString("releaseDate");
         addingDatetime = bundle.getString("currentTime");
-        movieHashmap.put("movieName",movieName);
-        movieHashmap.put("releaseDate",releaseDate);
-        movieHashmap.put("currentTime",addingDatetime);
-//新传来的数据如何和原来的数据中和在一起
-//        String[] colHEAD = new String[]{"movie Name","release Date","currentTime"};
-//        int[] dataCell = new int[]{R.id.wmovieName,R.id.wreleaseDate,R.id.addingDate};
-//        SimpleAdapter movieListAdapter = new SimpleAdapter(WatchlistFragment.this.getActivity(),movieHashmap,R.layout.list_view_watchlist,colHEAD,dataCell);
-//        movieListView.setAdapter(movieListAdapter);
+        editText.setText(movieID+","+ movieName+ ","+ releaseDate + ","+ addingDatetime);
+
 
         watchlistViewModel = new ViewModelProvider(this).get(WatchlistViewModel.class);
         watchlistViewModel.initializeVars(getActivity().getApplication());
@@ -77,17 +72,26 @@ public class WatchlistFragment extends Fragment {
             public void onChanged(List<Watchlist> watchlists) {
                 String allWatchlists = "";
                 for (Watchlist temp: watchlists){
-                    String watchlistString = (temp.getUid()+" "+temp.getMovieName()+ " " + temp.getReleaseDate()+" "+temp.getAddingDate());
+                    String watchlistString = (temp.getUid()+","+temp.getMovieName()+ "," + temp.getReleaseDate()+","+temp.getAddingDate());
                     allWatchlists = allWatchlists + System.getProperty("line.separator") + watchlistString;
                 }
                 textView_read.setText("All data: "+allWatchlists);
             }
         });
+        viewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
+
             addButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(!editText.getText().toString().isEmpty()){
-                        String[] details = editText.getText().toString().split(" ");
+                        String[] details = editText.getText().toString().split(",");
                         if (details.length == 4){
                             Watchlist watchlist = new Watchlist(Integer.parseInt(details[0]),details[1],details[2],details[3]);
                             watchlistViewModel.insert(watchlist);

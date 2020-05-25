@@ -25,6 +25,13 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/editText"
         android:text="Add to Database" />
+
+    <Button
+        android:id="@+id/viewButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="View details" />
+
     <TextView android:id="@+id/textView_add"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -52,4 +59,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView_update"/>
+
 </LinearLayout>
