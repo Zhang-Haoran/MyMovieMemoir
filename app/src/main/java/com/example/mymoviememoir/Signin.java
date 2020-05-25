@@ -75,9 +75,9 @@ public class Signin extends AppCompatActivity {
             super.onPostExecute(result);
             //if the given username and password cannot find a pair in database return []. therefore, to check them here.
             if (result.equals("[]") || result.equals("")){
-                userName.setError("Incorrect username or password");
-                password.setError("Incorrect username or password");
-                Toast.makeText(Signin.this,"Incorrect username or password",Toast.LENGTH_SHORT).show();
+                userName.setError("Incorrect login credential");
+                password.setError("Incorrect login credential");
+                Toast.makeText(Signin.this,"Incorrect login credential",Toast.LENGTH_SHORT).show();
 
             }
             else {
