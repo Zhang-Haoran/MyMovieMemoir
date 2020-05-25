@@ -13,8 +13,8 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.example.mymoviememoir.API.TheMovieDBAPI;
 import com.example.mymoviememoir.R;
+import com.example.mymoviememoir.networkconnection.RestClient;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -103,7 +103,7 @@ public class MovieViewFragment extends Fragment {
 
             @Override
             protected String doInBackground(String... strings) {
-                return TheMovieDBAPI.getMovieDetail(strings[0]);
+                return RestClient.getMovieDetail(strings[0]);
             }
 
             @Override
@@ -117,7 +117,7 @@ public class MovieViewFragment extends Fragment {
 
             @Override
             protected Void doInBackground(String... strings) {
-                resultList = TheMovieDBAPI.getDetails(strings[0]);
+                resultList = RestClient.getDetails(strings[0]);
 
                 return null;
             }
@@ -140,7 +140,7 @@ public class MovieViewFragment extends Fragment {
 
             @Override
             protected String doInBackground(String... strings) {
-                return TheMovieDBAPI.getCredit(strings[0]);
+                return RestClient.getCredit(strings[0]);
             }
 
             @Override
@@ -154,8 +154,8 @@ public class MovieViewFragment extends Fragment {
 
             @Override
             protected Void doInBackground(String... strings) {
-                resultList2 = TheMovieDBAPI.getCast(strings[0]);
-                resultList3 = TheMovieDBAPI.getDirector(strings[0]);
+                resultList2 = RestClient.getCast(strings[0]);
+                resultList3 = RestClient.getDirector(strings[0]);
                 return null;
             }
 
