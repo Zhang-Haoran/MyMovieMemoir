@@ -64,6 +64,12 @@
                 android:ems="10"
                 android:inputType="textPersonName" />
 
+            <Button
+                android:id="@+id/datetimePickerButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add a date" />
+
             <Spinner
                 android:id="@+id/CinemaSpinner"
                 android:layout_width="match_parent"
