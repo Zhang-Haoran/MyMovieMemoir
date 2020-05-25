@@ -25,6 +25,9 @@ public class Cinematable {
         this.suburb = suburb;
     }
 
+    public Cinematable(String cinemaid) {
+    }
+
     public Integer getCinemaid() {
         return cinemaid;
     }

@@ -24,6 +24,9 @@ public class Usertable {
     public Usertable() {
     }
 
+    public Usertable(int userid) {
+    }
+
     public Integer getUserid() {
         return userid;
     }

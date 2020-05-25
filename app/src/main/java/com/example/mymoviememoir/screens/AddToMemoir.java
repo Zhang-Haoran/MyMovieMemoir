@@ -22,14 +22,19 @@ import androidx.fragment.app.Fragment;
 
 import com.example.mymoviememoir.R;
 import com.example.mymoviememoir.entity.Cinematable;
+import com.example.mymoviememoir.entity.Memoirtable;
+import com.example.mymoviememoir.entity.Usertable;
 import com.example.mymoviememoir.serverConnection.Server;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 public class AddToMemoir extends Fragment {
     private TextView textView;
@@ -52,6 +57,7 @@ public class AddToMemoir extends Fragment {
         ImageView movieImage = view.findViewById(R.id.movieImage);
         TextView movieNameTextView = view.findViewById(R.id.addAMemoirMovieName);
         TextView releaseDateTextView = view.findViewById(R.id.addaMemoirReleaseDate);
+        final TextView commentTextview = view.findViewById(R.id.commentTextView);
 
         Bundle bundle = getArguments();
         movieID = bundle.getString("movieID");
@@ -91,16 +97,38 @@ public class AddToMemoir extends Fragment {
         });
 
        new findAllCinemaAsyncTask().execute();
-
-        Button addMemoir = view.findViewById(R.id.AddMemoir);
-        addMemoir.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String ratingScore = String.valueOf(ratingBar.getRating());
-                String watchDate = watchedDateTextView.getText().toString().trim();
-
-            }
-        });
+//
+//        Button addMemoir = view.findViewById(R.id.AddMemoir);
+//        addMemoir.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+//                SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
+//                String ratingScore = String.valueOf(ratingBar.getRating());
+//                String[] watchDatetime = watchedDateTextView.getText().toString().split("T");
+//                Date watchDate = null;
+//                try {
+//                    watchDate = formatter.parse(watchDatetime[0]);
+//                } catch (ParseException e) {
+//                    e.printStackTrace();
+//                }
+//                Date watchTime = null;
+//                try {
+//                    watchTime = timeFormatter.parse(watchDatetime[1]);
+//                } catch (ParseException e) {
+//                    e.printStackTrace();
+//                }
+//
+//              //  Date releaseDateFormat = formatter.parse(releaseDate+)
+//
+//                String comment = commentTextview.getText().toString();
+//                String cinemaid =spinnerResult;
+//                int userid = Home.userid;
+//              //  Memoirtable memoirtable = new Memoirtable(Integer.parseInt(movieID),movieName,releaseDate,watchDate,watchTime,comment,Integer.parseInt(ratingScore),new Cinematable(cinemaid), new Usertable(userid));
+//
+//
+////            }
+//        });
 
         Button addCinema = view.findViewById(R.id.addNewCinema);
         addCinema.setOnClickListener(new View.OnClickListener() {
