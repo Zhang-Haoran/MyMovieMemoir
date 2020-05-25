@@ -13,12 +13,12 @@ import androidx.fragment.app.Fragment;
 import com.example.mymoviememoir.R;
 import com.example.mymoviememoir.serverConnection.Server;
 
-public class MovieMemoirFragment extends Fragment {
+public class MovieMemoir extends Fragment {
     private TextView textView;
     private TextView findResultTextView;
 
 
-    public MovieMemoirFragment(){
+    public MovieMemoir(){
 
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){

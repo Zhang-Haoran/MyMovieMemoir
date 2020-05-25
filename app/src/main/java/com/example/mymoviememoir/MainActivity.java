@@ -12,12 +12,12 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.mymoviememoir.screens.HomeFragment;
-import com.example.mymoviememoir.screens.MapFragment;
-import com.example.mymoviememoir.screens.MovieMemoirFragment;
-import com.example.mymoviememoir.screens.MovieSearchFragment;
-import com.example.mymoviememoir.screens.ReportFragment;
-import com.example.mymoviememoir.screens.WatchlistFragment;
+import com.example.mymoviememoir.screens.Home;
+import com.example.mymoviememoir.screens.Map;
+import com.example.mymoviememoir.screens.MovieMemoir;
+import com.example.mymoviememoir.screens.MovieSearch;
+import com.example.mymoviememoir.screens.Report;
+import com.example.mymoviememoir.screens.Watchlist;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getSupportActionBar().setHomeButtonEnabled(true);
 
         navigationView.setNavigationItemSelectedListener(this);
-        replaceFragment(new HomeFragment());
+        replaceFragment(new Home());
 
     }
 
@@ -63,28 +63,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
         switch (id){
             case R.id.homeScreen:
-                replaceFragment(new HomeFragment());
+                replaceFragment(new Home());
                 break;
             case R.id.movieSearch:
-                replaceFragment(new MovieSearchFragment());
+                replaceFragment(new MovieSearch());
                 break;
 //            case R.id.movieView:
 //                replaceFragment(new MovieViewFragment());
 //                break;
             case R.id.watchlist:
-                replaceFragment(new WatchlistFragment());
+                replaceFragment(new Watchlist());
                 break;
 //            case R.id.addToMemoir:
 //                replaceFragment(new AddToMemoirFragment());
 //                break;
             case R.id.movieMemoir:
-                replaceFragment(new MovieMemoirFragment());
+                replaceFragment(new MovieMemoir());
                 break;
             case R.id.report:
-                replaceFragment(new ReportFragment());
+                replaceFragment(new Report());
                 break;
             case R.id.map:
-                replaceFragment(new MapFragment());
+                replaceFragment(new Map());
                 break;
 //            case R.id.advancedFeatures:
 //                replaceFragment(new AdvancedFeatureFragment());

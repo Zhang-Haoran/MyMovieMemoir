@@ -26,14 +26,14 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-public class HomeFragment extends Fragment {
+public class Home extends Fragment {
     private TextView textView;
     private String nameOfUser;
     private int userid;
     private List<HashMap<String,String>> movieList = new ArrayList<>();
     private ListView movieListView;
 
-    public HomeFragment(){
+    public Home(){
     }
 
     @Override
@@ -82,7 +82,7 @@ public class HomeFragment extends Fragment {
             }
             String[] colHEAD = new String[]{"Movie Name","Release Date","Rating Score"};
             int[] dataCell = new int[]{R.id.movieNameTextView,R.id.releaseDateTextView,R.id.ratingScoreTextView};
-            SimpleAdapter movieListAdapter = new SimpleAdapter(HomeFragment.this.getActivity(),movieList,R.layout.list_view,colHEAD,dataCell);
+            SimpleAdapter movieListAdapter = new SimpleAdapter(Home.this.getActivity(),movieList,R.layout.list_view,colHEAD,dataCell);
             movieListView.setAdapter(movieListAdapter);
         }
     }

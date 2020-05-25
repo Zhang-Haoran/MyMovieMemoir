@@ -22,7 +22,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-public class WatchlistFragment extends Fragment {
+public class Watchlist extends Fragment {
     private TextView textView;
 
     WatchlistDatabase db;
@@ -37,7 +37,7 @@ public class WatchlistFragment extends Fragment {
     private String releaseDate;
     private String addingDatetime;
     private HashMap<String,String> movieHashmap = new HashMap<>();
-    public WatchlistFragment(){
+    public Watchlist(){
 
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
@@ -64,11 +64,11 @@ public class WatchlistFragment extends Fragment {
 
         watchlistViewModel = new ViewModelProvider(this).get(WatchlistViewModel.class);
         watchlistViewModel.initializeVars(getActivity().getApplication());
-        watchlistViewModel.getAllWatchlist().observe(this, new Observer<List<Watchlist>>() {
+        watchlistViewModel.getAllWatchlist().observe(this, new Observer<List<com.example.mymoviememoir.entity.Watchlist>>() {
             @Override
-            public void onChanged(List<Watchlist> watchlists) {
+            public void onChanged(List<com.example.mymoviememoir.entity.Watchlist> watchlists) {
                 String allWatchlists = "";
-                for (Watchlist temp: watchlists){
+                for (com.example.mymoviememoir.entity.Watchlist temp: watchlists){
                     String watchlistString = (temp.getUid()+","+temp.getMovieName()+ "," + temp.getReleaseDate()+","+temp.getAddingDate());
                     allWatchlists = allWatchlists + System.getProperty("line.separator") + watchlistString;
                 }
@@ -90,7 +90,7 @@ public class WatchlistFragment extends Fragment {
                     if(!editText.getText().toString().isEmpty()){
                         String[] details = editText.getText().toString().split(",");
                         if (details.length == 4){
-                            Watchlist watchlist = new Watchlist(Integer.parseInt(details[0]),details[1],details[2],details[3]);
+                            com.example.mymoviememoir.entity.Watchlist watchlist = new com.example.mymoviememoir.entity.Watchlist(Integer.parseInt(details[0]),details[1],details[2],details[3]);
                             watchlistViewModel.insert(watchlist);
                             textView_insert.setText("Added Record: "+ Arrays.toString(details));
                         }

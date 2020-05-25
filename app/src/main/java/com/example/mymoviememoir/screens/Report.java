@@ -10,9 +10,9 @@ import androidx.fragment.app.Fragment;
 
 import com.example.mymoviememoir.R;
 
-public class ReportFragment extends Fragment {
+public class Report extends Fragment {
     private TextView textView;
-    public ReportFragment(){
+    public Report(){
 
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){

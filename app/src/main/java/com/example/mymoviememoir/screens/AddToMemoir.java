@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class AddToMemoirFragment extends Fragment {
+public class AddToMemoir extends Fragment {
     private TextView textView;
     private String movieID;
     private String movieName;
@@ -32,7 +32,7 @@ public class AddToMemoirFragment extends Fragment {
     private String spinnerResult;
     private String watchedDate;
 
-    public AddToMemoirFragment(){
+    public AddToMemoir(){
 
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
@@ -80,9 +80,6 @@ public class AddToMemoirFragment extends Fragment {
             }
 
         });
-
-
-
 
 
 

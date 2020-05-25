@@ -21,7 +21,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class MovieViewFragment extends Fragment {
+public class MovieView extends Fragment {
     private TextView textView;
     private String movieID;
     private String movieName;
@@ -37,7 +37,7 @@ public class MovieViewFragment extends Fragment {
     List<String> resultList2;
     List<String> resultList3;
     RatingBar ratingBar;
-    public MovieViewFragment(){
+    public MovieView(){
 
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
@@ -72,7 +72,7 @@ public class MovieViewFragment extends Fragment {
                 bundle.putString("movieName",movieName);
                 bundle.putString("releaseDate",mvreleasedate.getText().toString());
                 bundle.putString("currentTime",currentTime.toString());
-                Fragment fragment = new WatchlistFragment();
+                Fragment fragment = new Watchlist();
                 fragment.setArguments(bundle);
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.content_frame,fragment).commit();
@@ -88,7 +88,7 @@ public class MovieViewFragment extends Fragment {
                 bundle.putString("releaseDate",mvreleasedate.getText().toString());
                 bundle.putParcelable("Image",bitmap);
 
-                Fragment fragment = new AddToMemoirFragment();
+                Fragment fragment = new AddToMemoir();
                 fragment.setArguments(bundle);
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.content_frame,fragment).commit();

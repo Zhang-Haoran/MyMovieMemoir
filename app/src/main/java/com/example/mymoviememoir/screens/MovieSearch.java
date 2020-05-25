@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class MovieSearchFragment extends Fragment {
+public class MovieSearch extends Fragment {
     private TextView textView;
     private String searchInput;
     private List<HashMap<String,Object>> movieSearchList = new ArrayList<>();
@@ -38,7 +38,7 @@ public class MovieSearchFragment extends Fragment {
     List<String> resultList;
 
 
-    public MovieSearchFragment(){
+    public MovieSearch(){
 
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
@@ -101,7 +101,7 @@ public class MovieSearchFragment extends Fragment {
                 }
                 String[] colHEAD = new String[]{"Image","Movie Name","Release Date","movieID"};
                 int[] dataCell = new int[]{R.id.image,R.id.movieName,R.id.releaseYear,R.id.movieid};
-                SimpleAdapter movieListAdapter = new SimpleAdapter(MovieSearchFragment.this.getActivity(),movieSearchList,R.layout.list_view_movie_search,colHEAD,dataCell);
+                SimpleAdapter movieListAdapter = new SimpleAdapter(MovieSearch.this.getActivity(),movieSearchList,R.layout.list_view_movie_search,colHEAD,dataCell);
                 movieListAdapter.setViewBinder(new SimpleAdapter.ViewBinder(){
 
                     public boolean setViewValue(View view, Object data, String textRepresentation) {
@@ -128,7 +128,7 @@ public class MovieSearchFragment extends Fragment {
                         String movieID = movieSearchList.get(position).get("movieID").toString();
                         String movieName = movieSearchList.get(position).get("Movie Name").toString();
                         Object bitmap = movieSearchList.get(position).get("Image");
-                        Fragment fragment = new MovieViewFragment();
+                        Fragment fragment = new MovieView();
                         Bundle bundle = new Bundle();
                         bundle.putString("movieID",movieID);
                         bundle.putString("movieName",movieName);
