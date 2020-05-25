@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -35,6 +36,7 @@ public class MovieViewFragment extends Fragment {
     List<String> resultList;
     List<String> resultList2;
     List<String> resultList3;
+    RatingBar ratingBar;
     public MovieViewFragment(){
 
     }
@@ -50,6 +52,7 @@ public class MovieViewFragment extends Fragment {
         director = view.findViewById(R.id.director);
         summary = view.findViewById(R.id.summary);
         ratingScore = view.findViewById(R.id.ratingScore);
+        ratingBar = view.findViewById(R.id.ratingBar);
         Bundle bundle = getArguments();
         movieID = bundle.getString("movieID");
         movieName = bundle.getString("movieName");
@@ -127,6 +130,8 @@ public class MovieViewFragment extends Fragment {
                 mvreleasedate.setText(resultList.get(2));
                 summary.setText(resultList.get(3));
                 ratingScore.setText(resultList.get(4));
+                float ratingFloat = Float.parseFloat(resultList.get(4))/10*5;
+                ratingBar.setRating(ratingFloat);
                 new getCreditAsyncTask().execute(movieID);
             }
         }

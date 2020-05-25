@@ -120,11 +120,10 @@
 
             <RatingBar
                 android:id="@+id/ratingBar"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:numStars="5"
-                android:rating="0"
-                />
+                android:rating="0" />
 
             <Button
                 android:id="@+id/addToWatchlist"
