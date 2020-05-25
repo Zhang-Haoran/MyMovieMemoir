@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class RestClient {
+public class Server {
     public static final String BASE_URL = "http://192.168.1.103:8080/FIT5046Assignment1/webresources/";
     private static final String apiKey = "78324a2485620d39b0d6d391ac0573e6";
     private static String getMethod(String methodPath, String parameterInput){

@@ -21,7 +21,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.mymoviememoir.R;
-import com.example.mymoviememoir.networkconnection.RestClient;
+import com.example.mymoviememoir.networkconnection.Server;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -65,7 +65,7 @@ public class MovieSearchFragment extends Fragment {
 
             @Override
             protected String doInBackground(String... strings) {
-                return RestClient.searchMovie(strings[0]);
+                return Server.searchMovie(strings[0]);
             }
 
             @Override
@@ -80,7 +80,7 @@ public class MovieSearchFragment extends Fragment {
 
             @Override
             protected SimpleAdapter doInBackground(String... strings) {
-                resultList = RestClient.getSnippet(strings[0]);
+                resultList = Server.getSnippet(strings[0]);
                 for (int i = 0; i < resultList.size(); i+=4){
                     HashMap<String,Object> map = new HashMap<>();
                     map.put("Movie Name",resultList.get(i));

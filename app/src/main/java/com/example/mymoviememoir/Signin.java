@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.mymoviememoir.networkconnection.RestClient;
+import com.example.mymoviememoir.networkconnection.Server;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -67,7 +67,7 @@ public class Signin extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             String username = strings[0];
             String password = md5(strings[1]);
-            return RestClient.findByUsernameAndPassword(username,password);
+            return Server.findByUsernameAndPassword(username,password);
         }
 
         @Override

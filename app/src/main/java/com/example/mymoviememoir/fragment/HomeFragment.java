@@ -14,7 +14,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.example.mymoviememoir.R;
-import com.example.mymoviememoir.networkconnection.RestClient;
+import com.example.mymoviememoir.networkconnection.Server;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -61,7 +61,7 @@ public class HomeFragment extends Fragment {
 
         @Override
         protected String doInBackground(String... strings) {
-            return RestClient.findHighRatingMovieNameByUserid(userid);
+            return Server.findHighRatingMovieNameByUserid(userid);
         }
 
         @Override

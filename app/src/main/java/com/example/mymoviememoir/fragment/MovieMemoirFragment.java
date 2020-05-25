@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.example.mymoviememoir.R;
-import com.example.mymoviememoir.networkconnection.RestClient;
+import com.example.mymoviememoir.networkconnection.Server;
 
 public class MovieMemoirFragment extends Fragment {
     private TextView textView;
@@ -41,7 +41,7 @@ public class MovieMemoirFragment extends Fragment {
 
         @Override
         protected String doInBackground(Void... voids) {
-            return RestClient.findAllMovieMemoir();
+            return Server.findAllMovieMemoir();
         }
         protected  void onPostExecute(String memoir){
 

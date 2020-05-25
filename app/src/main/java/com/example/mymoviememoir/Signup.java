@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 import com.example.mymoviememoir.entity.Credentialstable;
 import com.example.mymoviememoir.entity.Usertable;
-import com.example.mymoviememoir.networkconnection.RestClient;
+import com.example.mymoviememoir.networkconnection.Server;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -213,7 +213,7 @@ public class Signup extends AppCompatActivity {
             String result = "";
             //Making HTTP request
             try {
-                url = new URL(RestClient.BASE_URL + methodPath);
+                url = new URL(Server.BASE_URL + methodPath);
                 //open the connection
                 conn = (HttpURLConnection) url.openConnection();
                 //set the timeout
@@ -247,7 +247,7 @@ public class Signup extends AppCompatActivity {
     private class getUsernameAsyncTask extends android.os.AsyncTask<Void,Void,Void> {
         @Override
         protected Void doInBackground(Void...voids)  {
-            String result = RestClient.findAllUsername();
+            String result = Server.findAllUsername();
             try {
                 JSONArray jsonArray = new JSONArray(result);
                 for (int i = 0; i< jsonArray.length();i++){
@@ -273,7 +273,7 @@ public class Signup extends AppCompatActivity {
     private class postUsertableAsyncTask extends android.os.AsyncTask<Usertable,Void,Usertable> {
         @Override
         protected Usertable doInBackground(Usertable...usertables)  {
-            RestClient.postUsertable(usertables[0]);
+            Server.postUsertable(usertables[0]);
             return usertables[0];
         }
 
@@ -294,7 +294,7 @@ public class Signup extends AppCompatActivity {
     private class postCredentialstableAsyncTask extends android.os.AsyncTask<Credentialstable,Void,Void> {
         @Override
         protected Void doInBackground(Credentialstable...credentialstables)  {
-            RestClient.postcredentialstable(credentialstables[0]);
+            Server.postcredentialstable(credentialstables[0]);
             return null;
         }
     }
