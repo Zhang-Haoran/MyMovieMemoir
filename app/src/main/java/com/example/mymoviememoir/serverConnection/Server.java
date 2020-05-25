@@ -1,5 +1,6 @@
 package com.example.mymoviememoir.serverConnection;
 
+import com.example.mymoviememoir.entity.Cinematable;
 import com.example.mymoviememoir.entity.Credentialstable;
 import com.example.mymoviememoir.entity.Usertable;
 import com.google.gson.Gson;
@@ -94,6 +95,18 @@ public class Server {
         postMethod("fit5046assignment1.credentialstable/",credentialstableJson);
 
     }
+
+    //add to movie memoir screen get cinema
+    public static String findAllCinema(){
+        return getMethod("fit5046assignment1.cinematable/","");
+    }
+    public static void  addCinema(Cinematable cinematable){
+        Gson gson = new Gson();
+        String cinematableJson = gson.toJson(cinematable);
+        postMethod("fit5046assignment1.cinematable/",cinematableJson);
+    }
+
+
 //home page method
     public static String findHighRatingMovieNameByUserid(int userid){
         URL url = null;
@@ -282,4 +295,6 @@ public class Server {
         }
         return details;
     }
+
+
 }

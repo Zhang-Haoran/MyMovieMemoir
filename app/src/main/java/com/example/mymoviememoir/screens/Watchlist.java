@@ -15,7 +15,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.mymoviememoir.R;
 import com.example.mymoviememoir.database.WatchlistDatabase;
-import com.example.mymoviememoir.entity.Watchlist;
 import com.example.mymoviememoir.viewmodel.WatchlistViewModel;
 
 import java.util.Arrays;

@@ -1,26 +1,35 @@
 package com.example.mymoviememoir.screens;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.example.mymoviememoir.R;
+import com.example.mymoviememoir.entity.Cinematable;
+import com.example.mymoviememoir.serverConnection.Server;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 public class AddToMemoir extends Fragment {
     private TextView textView;
@@ -39,7 +48,7 @@ public class AddToMemoir extends Fragment {
         View view = inflater.inflate(R.layout.addtomemoir_fragment,container,false);
         textView = view.findViewById(R.id.addtomemoirTextView);
         textView.setText("Add To Memoir Screen");
-
+        final RatingBar ratingBar = view.findViewById(R.id.ratingBar2);
         ImageView movieImage = view.findViewById(R.id.movieImage);
         TextView movieNameTextView = view.findViewById(R.id.addAMemoirMovieName);
         TextView releaseDateTextView = view.findViewById(R.id.addaMemoirReleaseDate);
@@ -81,26 +90,105 @@ public class AddToMemoir extends Fragment {
 
         });
 
+       new findAllCinemaAsyncTask().execute();
 
-
-        Spinner CinemaSpinner = view.findViewById(R.id.CinemaSpinner);
-        //spinner
-        List<String> cinemalist = new ArrayList<>();
-        final ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(view.getContext(), android.R.layout.simple_spinner_item,cinemalist);
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-        CinemaSpinner.setAdapter(spinnerAdapter);
-        CinemaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        Button addMemoir = view.findViewById(R.id.AddMemoir);
+        addMemoir.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                spinnerResult = parent.getItemAtPosition(position).toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+            public void onClick(View v) {
+                String ratingScore = String.valueOf(ratingBar.getRating());
+                String watchDate = watchedDateTextView.getText().toString().trim();
 
             }
         });
-        return view;    }
+
+        Button addCinema = view.findViewById(R.id.addNewCinema);
+        addCinema.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LayoutInflater li = LayoutInflater.from(getActivity());
+                final View promptsView = li.inflate(R.layout.addcinema,null);
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                        getActivity());
+                alertDialogBuilder.setView(promptsView);
+                alertDialogBuilder
+                        .setCancelable(false)
+                        .setPositiveButton("OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,int id) {
+                                        EditText cName = promptsView.findViewById(R.id.addCinemaName);
+                                        EditText cSuburb = promptsView.findViewById(R.id.addCinemaSuburb);
+                                        String cinemaName = cName.getText().toString().trim();
+                                        String cinemaSuburb = cSuburb.getText().toString().trim();
+                                        Cinematable cinematable = new Cinematable(Home.userid+1000,cinemaName,cinemaSuburb,"");
+
+                                            addCinemaAsyncTask addCinemaAsyncTask = new addCinemaAsyncTask();
+                                            addCinemaAsyncTask.execute(cinematable);
+                                    }
+                                })
+                        .setNegativeButton("Cancel",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                // create alert dialog
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                // show it
+                alertDialog.show();
+
+            }
+        });
+
+
+        return view;
+
+
+
+    }
+
+    private class findAllCinemaAsyncTask extends AsyncTask<Void, Void, ArrayList<String>> {
+
+        @Override
+        protected ArrayList<String> doInBackground(Void... voids) {
+            ArrayList<String> cinemaList = new ArrayList<>();
+            String allCinema = Server.findAllCinema();
+            JsonElement jsonElement = new JsonParser().parse(allCinema);
+            JsonArray jsonArray =jsonElement.getAsJsonArray();
+            for (JsonElement j: jsonArray){
+                JsonObject jsonObject = j.getAsJsonObject();
+                String cinema = jsonObject.getAsJsonPrimitive("cinemaid").getAsString() + ")" + jsonObject.getAsJsonPrimitive("cinemaname").getAsString() + " " + jsonObject.getAsJsonPrimitive("suburb").getAsString();
+                cinemaList.add(cinema);
+            }
+            return cinemaList;
+        }
+        @Override
+        protected void onPostExecute(ArrayList<String> cinemas) {
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, cinemas);
+            Spinner spinner = getView().findViewById(R.id.CinemaSpinner);
+            spinner.setAdapter(arrayAdapter);
+
+
+        }
+
+    }
+
+
+
+    private class addCinemaAsyncTask extends AsyncTask<Cinematable, Void,Void>{
+        @Override
+        protected Void doInBackground(Cinematable... cinematables) {
+            Server.addCinema(cinematables[0]);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            new findAllCinemaAsyncTask().execute();
+        }
+    }
     //formatting date
     public String dateFormatting(int year, int month, int day){
         String result ="";

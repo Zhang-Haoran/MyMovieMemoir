@@ -29,7 +29,7 @@ import java.util.List;
 public class Home extends Fragment {
     private TextView textView;
     private String nameOfUser;
-    private int userid;
+    public static int userid;
     private List<HashMap<String,String>> movieList = new ArrayList<>();
     private ListView movieListView;
 
