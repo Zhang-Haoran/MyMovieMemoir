@@ -1,4 +1,4 @@
-package com.example.mymoviememoir;
+package com.example.mymoviememoir.screens;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,9 +17,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mymoviememoir.R;
 import com.example.mymoviememoir.entity.Credentialstable;
 import com.example.mymoviememoir.entity.Usertable;
-import com.example.mymoviememoir.networkconnection.Server;
+import com.example.mymoviememoir.serverConnection.Server;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -49,14 +50,21 @@ public class Signup extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
         Button signupButtton = findViewById(R.id.signinConfirmButton);
         Button datetimePickerButton = findViewById(R.id.dobPickerButton);
+
+
         Calendar calendar = Calendar.getInstance();// get a calendar using the current time zone and locale of the system. For example today is 10/05/2020, it will get 10,4, 2020
         final int calendarYear = calendar.get(Calendar.YEAR);
         final int calendarMonth = calendar.get(Calendar.MONTH);// month from calendar starts from 0 end in 11. it needs to + 1 to represent current month
         final int calendarDay = calendar.get(Calendar.DAY_OF_MONTH);
+
+
         //Formatting date. add 0 at front for month or day which is too short to store into database. to store into database, we need to change 2020-1-1 to 2020-01-01
         signupDate = dateFormatting(calendarYear,calendarMonth,calendarDay);
         final TextView datePickerResultTextView = findViewById(R.id.datepickerResultTextView);
         final Spinner stateSpinnerTextView = findViewById(R.id.stateSpinner);
+
+
+
         //hashmap key value pair
         etMap.put("emailInputField",(EditText) findViewById(R.id.emailInputField));
         etMap.put("passwordInputField",(EditText) findViewById(R.id.passwordInputField));

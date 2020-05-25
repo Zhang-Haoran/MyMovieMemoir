@@ -12,15 +12,12 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.mymoviememoir.fragment.AddToMemoirFragment;
-import com.example.mymoviememoir.fragment.AdvancedFeatureFragment;
-import com.example.mymoviememoir.fragment.HomeFragment;
-import com.example.mymoviememoir.fragment.MapFragment;
-import com.example.mymoviememoir.fragment.MovieMemoirFragment;
-import com.example.mymoviememoir.fragment.MovieSearchFragment;
-import com.example.mymoviememoir.fragment.MovieViewFragment;
-import com.example.mymoviememoir.fragment.ReportFragment;
-import com.example.mymoviememoir.fragment.WatchlistFragment;
+import com.example.mymoviememoir.screens.HomeFragment;
+import com.example.mymoviememoir.screens.MapFragment;
+import com.example.mymoviememoir.screens.MovieMemoirFragment;
+import com.example.mymoviememoir.screens.MovieSearchFragment;
+import com.example.mymoviememoir.screens.ReportFragment;
+import com.example.mymoviememoir.screens.WatchlistFragment;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {

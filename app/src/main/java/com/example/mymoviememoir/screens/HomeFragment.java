@@ -1,4 +1,4 @@
-package com.example.mymoviememoir.fragment;
+package com.example.mymoviememoir.screens;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -14,7 +14,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.example.mymoviememoir.R;
-import com.example.mymoviememoir.networkconnection.Server;
+import com.example.mymoviememoir.serverConnection.Server;
 
 import org.json.JSONArray;
 import org.json.JSONException;

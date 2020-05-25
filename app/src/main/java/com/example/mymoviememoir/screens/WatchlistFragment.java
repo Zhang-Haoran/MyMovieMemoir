@@ -1,6 +1,5 @@
-package com.example.mymoviememoir.fragment;
+package com.example.mymoviememoir.screens;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -20,7 +18,6 @@ import com.example.mymoviememoir.database.WatchlistDatabase;
 import com.example.mymoviememoir.entity.Watchlist;
 import com.example.mymoviememoir.viewmodel.WatchlistViewModel;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;

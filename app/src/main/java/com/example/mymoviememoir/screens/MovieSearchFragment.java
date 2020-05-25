@@ -1,4 +1,4 @@
-package com.example.mymoviememoir.fragment;
+package com.example.mymoviememoir.screens;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -21,7 +21,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.mymoviememoir.R;
-import com.example.mymoviememoir.networkconnection.Server;
+import com.example.mymoviememoir.serverConnection.Server;
 
 import java.io.IOException;
 import java.io.InputStream;

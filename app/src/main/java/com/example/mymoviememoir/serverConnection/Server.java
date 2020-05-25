@@ -1,4 +1,4 @@
-package com.example.mymoviememoir.networkconnection;
+package com.example.mymoviememoir.serverConnection;
 
 import com.example.mymoviememoir.entity.Credentialstable;
 import com.example.mymoviememoir.entity.Usertable;

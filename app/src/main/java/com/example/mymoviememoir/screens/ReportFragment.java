@@ -1,4 +1,4 @@
-package com.example.mymoviememoir.fragment;
+package com.example.mymoviememoir.screens;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
