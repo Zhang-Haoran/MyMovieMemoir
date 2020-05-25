@@ -1,18 +1,16 @@
 package com.example.mymoviememoir.entity;
 
-import java.util.Date;
-
 public class Memoirtable {
 
     private Integer memoirid;
 
     private String moviename;
 
-    private Date moviereleasedate;
+    private String moviereleasedate;
 
-    private Date watchdate;
+    private String watchdate;
 
-    private Date watchtime;
+    private String watchtime;
 
     private String comment;
 
@@ -40,27 +38,27 @@ public class Memoirtable {
         this.moviename = moviename;
     }
 
-    public Date getMoviereleasedate() {
+    public String getMoviereleasedate() {
         return moviereleasedate;
     }
 
-    public void setMoviereleasedate(Date moviereleasedate) {
+    public void setMoviereleasedate(String moviereleasedate) {
         this.moviereleasedate = moviereleasedate;
     }
 
-    public Date getWatchdate() {
+    public String getWatchdate() {
         return watchdate;
     }
 
-    public void setWatchdate(Date watchdate) {
+    public void setWatchdate(String watchdate) {
         this.watchdate = watchdate;
     }
 
-    public Date getWatchtime() {
+    public String getWatchtime() {
         return watchtime;
     }
 
-    public void setWatchtime(Date watchtime) {
+    public void setWatchtime(String watchtime) {
         this.watchtime = watchtime;
     }
 
@@ -96,7 +94,7 @@ public class Memoirtable {
         this.userid = userid;
     }
 
-    public Memoirtable(Integer memoirid, String moviename, Date moviereleasedate, Date watchdate, Date watchtime, String comment, Integer ratingscore, Cinematable cinemaid, Usertable userid) {
+    public Memoirtable(Integer memoirid, String moviename, String moviereleasedate, String watchdate, String watchtime, String comment, Integer ratingscore, Cinematable cinemaid, Usertable userid) {
         this.memoirid = memoirid;
         this.moviename = moviename;
         this.moviereleasedate = moviereleasedate;

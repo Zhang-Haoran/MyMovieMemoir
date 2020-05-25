@@ -97,38 +97,7 @@ public class AddToMemoir extends Fragment {
         });
 
        new findAllCinemaAsyncTask().execute();
-//
-//        Button addMemoir = view.findViewById(R.id.AddMemoir);
-//        addMemoir.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-//                SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
-//                String ratingScore = String.valueOf(ratingBar.getRating());
-//                String[] watchDatetime = watchedDateTextView.getText().toString().split("T");
-//                Date watchDate = null;
-//                try {
-//                    watchDate = formatter.parse(watchDatetime[0]);
-//                } catch (ParseException e) {
-//                    e.printStackTrace();
-//                }
-//                Date watchTime = null;
-//                try {
-//                    watchTime = timeFormatter.parse(watchDatetime[1]);
-//                } catch (ParseException e) {
-//                    e.printStackTrace();
-//                }
-//
-//              //  Date releaseDateFormat = formatter.parse(releaseDate+)
-//
-//                String comment = commentTextview.getText().toString();
-//                String cinemaid =spinnerResult;
-//                int userid = Home.userid;
-//              //  Memoirtable memoirtable = new Memoirtable(Integer.parseInt(movieID),movieName,releaseDate,watchDate,watchTime,comment,Integer.parseInt(ratingScore),new Cinematable(cinemaid), new Usertable(userid));
-//
-//
-////            }
-//        });
+
 
         Button addCinema = view.findViewById(R.id.addNewCinema);
         addCinema.setOnClickListener(new View.OnClickListener() {
@@ -168,6 +137,40 @@ public class AddToMemoir extends Fragment {
 
             }
         });
+
+
+        Button addMemoir = view.findViewById(R.id.AddMemoir);
+        addMemoir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String ratingScore = String.valueOf(ratingBar.getRating());
+                String[] watchDatetime =watchedDateTextView.getText().toString().split("T");
+
+
+                   String watchDate = watchDatetime[0];
+
+
+                   String watchTime = "T"+watchDatetime[1];
+
+
+
+                String comment = commentTextview.getText().toString();
+                String cinemaid = "1";
+                int userid = Home.userid;
+                Memoirtable memoirtable = new Memoirtable(Integer.parseInt(movieID)
+                        ,movieName,releaseDate,
+                        watchDate,
+                        watchTime,
+                        comment,
+                        Integer.parseInt(ratingScore),
+                        new Cinematable(cinemaid),
+                        new Usertable(userid));
+
+
+
+           }
+        });
+
 
 
         return view;
@@ -217,6 +220,17 @@ public class AddToMemoir extends Fragment {
             new findAllCinemaAsyncTask().execute();
         }
     }
+    private class postMemoirAsyncTask extends AsyncTask<Memoirtable,Void,Void>{
+
+        @Override
+        protected Void doInBackground(Memoirtable... memoirtables) {
+            Server.postMemoirtable(memoirtables[0]);
+            return null;
+        }
+    }
+
+
+
     //formatting date
     public String dateFormatting(int year, int month, int day){
         String result ="";

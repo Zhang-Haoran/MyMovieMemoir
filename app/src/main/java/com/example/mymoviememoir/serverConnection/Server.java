@@ -2,6 +2,7 @@ package com.example.mymoviememoir.serverConnection;
 
 import com.example.mymoviememoir.entity.Cinematable;
 import com.example.mymoviememoir.entity.Credentialstable;
+import com.example.mymoviememoir.entity.Memoirtable;
 import com.example.mymoviememoir.entity.Usertable;
 import com.google.gson.Gson;
 
@@ -104,6 +105,12 @@ public class Server {
         Gson gson = new Gson();
         String cinematableJson = gson.toJson(cinematable);
         postMethod("fit5046assignment1.cinematable/",cinematableJson);
+    }
+
+    public static void postMemoirtable(Memoirtable memoirtable){
+        Gson gson = new Gson();
+        String memoirtableJson = gson.toJson(memoirtable);
+        postMethod("fit5046assignment1.memoirtable/",memoirtableJson);
     }
 
 
