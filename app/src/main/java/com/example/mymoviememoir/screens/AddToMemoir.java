@@ -194,7 +194,7 @@ public class AddToMemoir extends Fragment {
             @Override
             public void onClick(View v) {
                String rDate = releaseDate+ "T00:00:00+10:00";
-                Memoirtable memoirtable = new Memoirtable(101,movieName,rDate,watchedDate,watchedTime,commentTextview.getText().toString(),String.valueOf( ratingBar.getRating()),cinematable,Home.usertable);
+                Memoirtable memoirtable = new Memoirtable(101,movieName,rDate,watchedDate,watchedTime,commentTextview.getText().toString(),String.valueOf (ratingBar.getRating()),cinematable,Home.usertable);
                 new postMemoirAsyncTask().execute(memoirtable);
            }
         });
