@@ -47,9 +47,7 @@ public class AddToMemoir extends Fragment {
     private String movieID;
     private String movieName;
     private String releaseDate;
-    private String addingDatetime;
     private Bitmap bitmap;
-    private String spinnerResult;
     private String watchedDate;
     private String watchedTime;
     private Cinematable cinematable;
@@ -160,10 +158,10 @@ public class AddToMemoir extends Fragment {
                         .setPositiveButton("OK",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog,int id) {
-                                        EditText cName = promptsView.findViewById(R.id.addCinemaName);
-                                        EditText cSuburb = promptsView.findViewById(R.id.addCinemaSuburb);
-                                        String cinemaName = cName.getText().toString().trim();
-                                        String cinemaSuburb = cSuburb.getText().toString().trim();
+                                        EditText cinemaEditText = promptsView.findViewById(R.id.addCinemaName);
+                                        EditText suburbEditText = promptsView.findViewById(R.id.addCinemaSuburb);
+                                        String cinemaName = cinemaEditText.getText().toString().trim();
+                                        String cinemaSuburb = suburbEditText.getText().toString().trim();
                                         Cinematable cinematable = new Cinematable(Integer.parseInt(movieID),cinemaName,cinemaSuburb,"");
 
                                             addCinemaAsyncTask addCinemaAsyncTask = new addCinemaAsyncTask();
