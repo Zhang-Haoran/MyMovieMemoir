@@ -19,6 +19,7 @@ import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
@@ -276,6 +277,7 @@ public class AddToMemoir extends Fragment {
         @Override
         protected Void doInBackground(Memoirtable... memoirtables) {
             Server.postMemoirtable(memoirtables[0]);
+            Toast.makeText(getActivity(),"Post memoir successfully",Toast.LENGTH_SHORT).show();
             return null;
         }
     }
