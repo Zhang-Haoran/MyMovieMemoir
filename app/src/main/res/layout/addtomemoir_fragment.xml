@@ -70,6 +70,25 @@
                 android:layout_height="wrap_content"
                 android:text="Add a date" />
 
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Time you watched: " />
+
+            <EditText
+                android:id="@+id/watchedTextInpuField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <Button
+                android:id="@+id/watchedTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add a time" />
+
             <Spinner
                 android:id="@+id/CinemaSpinner"
                 android:layout_width="match_parent"

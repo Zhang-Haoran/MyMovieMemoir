@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.example.mymoviememoir.R;
+import com.example.mymoviememoir.entity.Usertable;
 import com.example.mymoviememoir.serverConnection.Server;
 
 import org.json.JSONArray;
@@ -32,6 +33,7 @@ public class Home extends Fragment {
     public static int userid;
     private List<HashMap<String,String>> movieList = new ArrayList<>();
     private ListView movieListView;
+    public static Usertable usertable;
 
     public Home(){
     }
@@ -40,6 +42,8 @@ public class Home extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home_fragment,container,false);
         textView = view.findViewById(R.id.homeTextView);
+        usertable = new Usertable();
+        usertable.setUserid(userid);
         Intent intent = getActivity().getIntent();
         Bundle bundle = intent.getExtras();
         nameOfUser = bundle.getString("nameOfUser");

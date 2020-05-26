@@ -22,6 +22,9 @@ public class Memoirtable {
     public Memoirtable() {
     }
 
+    public Memoirtable(String movieName, String watchedDate, String watchedTime, String rDate, String toString, float rating, Cinematable cinematable, Usertable usertable) {
+    }
+
     public Integer getMemoirid() {
         return memoirid;
     }

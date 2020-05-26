@@ -1,6 +1,7 @@
 package com.example.mymoviememoir.screens;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -16,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
@@ -30,11 +33,13 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.List;
 
 public class AddToMemoir extends Fragment {
     private TextView textView;
@@ -45,6 +50,9 @@ public class AddToMemoir extends Fragment {
     private Bitmap bitmap;
     private String spinnerResult;
     private String watchedDate;
+    private String watchedTime;
+    private Cinematable cinematable;
+    private List<Cinematable> cinematableLists;
 
     public AddToMemoir(){
 
@@ -59,6 +67,8 @@ public class AddToMemoir extends Fragment {
         TextView releaseDateTextView = view.findViewById(R.id.addaMemoirReleaseDate);
         final TextView commentTextview = view.findViewById(R.id.commentTextView);
 
+        cinematable = new Cinematable();
+        cinematableLists = new ArrayList<Cinematable>();
         Bundle bundle = getArguments();
         movieID = bundle.getString("movieID");
         movieName = bundle.getString("movieName");
@@ -69,6 +79,7 @@ public class AddToMemoir extends Fragment {
         releaseDateTextView.setText(releaseDate);
         movieImage.setImageBitmap(bitmap);
 
+        new findAllCinemaAsyncTask().execute();
 
         Calendar calendar = Calendar.getInstance();// get a calendar using the current time zone and locale of the system. For example today is 10/05/2020, it will get 10,4, 2020
         final int calendarYear = calendar.get(Calendar.YEAR);
@@ -96,9 +107,44 @@ public class AddToMemoir extends Fragment {
 
         });
 
-       new findAllCinemaAsyncTask().execute();
+        Button timepickerButton = view.findViewById(R.id.watchedTime);
+        final TextView watchtimeInputField = view.findViewById(R.id.watchedTextInpuField);
+        Calendar calendar1 = Calendar.getInstance();
+        final int hour= calendar1.get(Calendar.HOUR_OF_DAY);
+        final int minute = calendar1.get(Calendar.MINUTE);
+        timepickerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        StringBuffer time = new StringBuffer();
+                        String hour = "";
+                        if (hourOfDay < 10){
+                            StringBuffer str = new StringBuffer("0");
+                            hour = str.append(hourOfDay).toString();
+                        }else {
+                            hour = String.valueOf(hourOfDay);
+                        }
+                        String min = "";
+                        if (minute < 10){
+                            StringBuffer str = new StringBuffer("0");
+                            min = str.append(hourOfDay).toString();
+                        }else {
+                            min = String.valueOf(hourOfDay);
+                        }
+                        time.append(hour+":"+min+":00");
+                        watchedTime = "1970-01-01T"+time+"+10:00";
+                        watchtimeInputField.setText(watchedTime);
+                    }
+                },hour,minute,true);
+                timePickerDialog.show();
+            }
+        });
 
 
+
+//add a new cinema
         Button addCinema = view.findViewById(R.id.addNewCinema);
         addCinema.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,35 +185,17 @@ public class AddToMemoir extends Fragment {
         });
 
 
+
+
+
+
         Button addMemoir = view.findViewById(R.id.AddMemoir);
         addMemoir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String ratingScore = String.valueOf(ratingBar.getRating());
-                String[] watchDatetime =watchedDateTextView.getText().toString().split("T");
-
-
-                   String watchDate = watchDatetime[0];
-
-
-                   String watchTime = "T"+watchDatetime[1];
-
-
-
-                String comment = commentTextview.getText().toString();
-                String cinemaid = "1";
-                int userid = Home.userid;
-                Memoirtable memoirtable = new Memoirtable(Integer.parseInt(movieID)
-                        ,movieName,releaseDate,
-                        watchDate,
-                        watchTime,
-                        comment,
-                        Integer.parseInt(ratingScore),
-                        new Cinematable(cinemaid),
-                        new Usertable(userid));
-
-
-
+               String rDate = releaseDate+ "T00:00:00+10:00";
+                Memoirtable memoirtable = new Memoirtable(Home.userid+1000,movieName,rDate,watchedDate,watchedTime,commentTextview.getText().toString(),(int) ratingBar.getRating(),cinematable,Home.usertable);
+                new postMemoirAsyncTask().execute(memoirtable);
            }
         });
 
@@ -179,12 +207,20 @@ public class AddToMemoir extends Fragment {
 
     }
 
-    private class findAllCinemaAsyncTask extends AsyncTask<Void, Void, ArrayList<String>> {
+    private class findAllCinemaAsyncTask extends AsyncTask<Void, Void, String> {
 
         @Override
-        protected ArrayList<String> doInBackground(Void... voids) {
-            ArrayList<String> cinemaList = new ArrayList<>();
+        protected String doInBackground(Void... voids) {
+
             String allCinema = Server.findAllCinema();
+
+            return allCinema;
+        }
+
+        @Override
+        protected void onPostExecute(String allCinema) {
+            super.onPostExecute(allCinema);
+            ArrayList<String> cinemaList = new ArrayList<>();
             JsonElement jsonElement = new JsonParser().parse(allCinema);
             JsonArray jsonArray =jsonElement.getAsJsonArray();
             for (JsonElement j: jsonArray){
@@ -192,17 +228,32 @@ public class AddToMemoir extends Fragment {
                 String cinema = jsonObject.getAsJsonPrimitive("cinemaid").getAsString() + ")" + jsonObject.getAsJsonPrimitive("cinemaname").getAsString() + " " + jsonObject.getAsJsonPrimitive("suburb").getAsString();
                 cinemaList.add(cinema);
             }
-            return cinemaList;
-        }
-        @Override
-        protected void onPostExecute(ArrayList<String> cinemas) {
-            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, cinemas);
+
+            try {
+                JSONArray jsonArray1 = new JSONArray(allCinema);
+                for (int i =0; i<jsonArray1.length();i++){
+                    JSONObject jsonObject = jsonArray1.getJSONObject(i);
+                    Cinematable c = new Cinematable(jsonObject.getInt("cinemaid"),jsonObject.getString("cinemaname"),jsonObject.getString("suburb"),"");
+                    cinematableLists.add(c);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, cinemaList);
             Spinner spinner = getView().findViewById(R.id.CinemaSpinner);
             spinner.setAdapter(arrayAdapter);
+            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    cinematable= cinematableLists.get(position);
+                }
 
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
 
+                }
+            });
         }
-
     }
 
 

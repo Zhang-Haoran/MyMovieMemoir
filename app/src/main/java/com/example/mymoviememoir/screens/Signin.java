@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.mymoviememoir.MainActivity;
 import com.example.mymoviememoir.R;
+import com.example.mymoviememoir.entity.Usertable;
 import com.example.mymoviememoir.serverConnection.Server;
 
 import org.json.JSONArray;
