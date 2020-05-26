@@ -14,7 +14,7 @@ public class Memoirtable {
 
     private String comment;
 
-    private Integer ratingscore;
+    private String ratingscore;
 
     private Cinematable cinemaid;
     private Usertable userid;
@@ -73,11 +73,11 @@ public class Memoirtable {
         this.comment = comment;
     }
 
-    public Integer getRatingscore() {
+    public String getRatingscore() {
         return ratingscore;
     }
 
-    public void setRatingscore(Integer ratingscore) {
+    public void setRatingscore(String ratingscore) {
         this.ratingscore = ratingscore;
     }
 
@@ -97,7 +97,7 @@ public class Memoirtable {
         this.userid = userid;
     }
 
-    public Memoirtable(Integer memoirid, String moviename, String moviereleasedate, String watchdate, String watchtime, String comment, Integer ratingscore, Cinematable cinemaid, Usertable userid) {
+    public Memoirtable(Integer memoirid, String moviename, String moviereleasedate, String watchdate, String watchtime, String comment, String ratingscore, Cinematable cinemaid, Usertable userid) {
         this.memoirid = memoirid;
         this.moviename = moviename;
         this.moviereleasedate = moviereleasedate;

@@ -43,7 +43,7 @@ public class Home extends Fragment {
         View view = inflater.inflate(R.layout.home_fragment,container,false);
         textView = view.findViewById(R.id.homeTextView);
         usertable = new Usertable();
-        usertable.setUserid(userid);
+
         Intent intent = getActivity().getIntent();
         Bundle bundle = intent.getExtras();
         nameOfUser = bundle.getString("nameOfUser");
@@ -65,7 +65,9 @@ public class Home extends Fragment {
 
         @Override
         protected String doInBackground(String... strings) {
+            usertable.setUserid(userid);
             return Server.findHighRatingMovieNameByUserid(userid);
+
         }
 
         @Override
