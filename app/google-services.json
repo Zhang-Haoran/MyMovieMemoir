@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "270956214220",
+    "firebase_url": "https://mymoviememoir-a4852.firebaseio.com",
+    "project_id": "mymoviememoir-a4852",
+    "storage_bucket": "mymoviememoir-a4852.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:270956214220:android:df74644d71b9c30e91cf69",
+        "android_client_info": {
+          "package_name": "com.example.mymoviememoir"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "270956214220-509l4a9nndoaplb2q62vc5jpqfnr44m9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCp_NxbnJs8ESzcdWE5eQbvU2-zg2xm6do"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "270956214220-509l4a9nndoaplb2q62vc5jpqfnr44m9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
