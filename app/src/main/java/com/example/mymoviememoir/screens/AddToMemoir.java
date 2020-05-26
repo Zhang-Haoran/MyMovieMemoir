@@ -163,7 +163,7 @@ public class AddToMemoir extends Fragment {
                                         EditText cSuburb = promptsView.findViewById(R.id.addCinemaSuburb);
                                         String cinemaName = cName.getText().toString().trim();
                                         String cinemaSuburb = cSuburb.getText().toString().trim();
-                                        Cinematable cinematable = new Cinematable(Home.userid+1000,cinemaName,cinemaSuburb,"");
+                                        Cinematable cinematable = new Cinematable(Integer.parseInt(movieID),cinemaName,cinemaSuburb,"");
 
                                             addCinemaAsyncTask addCinemaAsyncTask = new addCinemaAsyncTask();
                                             addCinemaAsyncTask.execute(cinematable);
@@ -194,7 +194,7 @@ public class AddToMemoir extends Fragment {
             @Override
             public void onClick(View v) {
                String rDate = releaseDate+ "T00:00:00+10:00";
-                Memoirtable memoirtable = new Memoirtable(Integer.parseInt(movieID),movieName,rDate,watchedDate,watchedTime,commentTextview.getText().toString(), String.valueOf(ratingBar.getRating()),cinematable,Home.usertable);
+                Memoirtable memoirtable = new Memoirtable(Integer.parseInt(movieID),movieName,rDate,watchedDate,watchedTime,commentTextview.getText().toString(), (int) ratingBar.getRating(),cinematable,Home.usertable);
                 new postMemoirAsyncTask().execute(memoirtable);
            }
         });
@@ -225,7 +225,7 @@ public class AddToMemoir extends Fragment {
             JsonArray jsonArray =jsonElement.getAsJsonArray();
             for (JsonElement j: jsonArray){
                 JsonObject jsonObject = j.getAsJsonObject();
-                String cinema = jsonObject.getAsJsonPrimitive("cinemaid").getAsString() + ")" + jsonObject.getAsJsonPrimitive("cinemaname").getAsString() + " " + jsonObject.getAsJsonPrimitive("suburb").getAsString();
+                String cinema = jsonObject.getAsJsonPrimitive("cinemaid").getAsString() + ". " + jsonObject.getAsJsonPrimitive("cinemaname").getAsString() + " " + jsonObject.getAsJsonPrimitive("suburb").getAsString();
                 cinemaList.add(cinema);
             }
 
