@@ -55,4 +55,5 @@ public class Watchlist {
     public void setAddingDate(String addingDate) {
         this.addingDate = addingDate;
     }
+
 }

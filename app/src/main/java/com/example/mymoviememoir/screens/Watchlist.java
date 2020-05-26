@@ -1,5 +1,6 @@
 package com.example.mymoviememoir.screens;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,13 +10,17 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.mymoviememoir.R;
 import com.example.mymoviememoir.database.WatchlistDatabase;
+import com.example.mymoviememoir.entity.Cinematable;
 import com.example.mymoviememoir.viewmodel.WatchlistViewModel;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -36,9 +41,9 @@ public class Watchlist extends Fragment {
     private String releaseDate;
     private String addingDatetime;
     private HashMap<String,String> movieHashmap = new HashMap<>();
-    public Watchlist(){
 
-    }
+
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.watchlist_fragment,container,false);
         textView = view.findViewById(R.id.watchlistTextView);
@@ -59,7 +64,6 @@ public class Watchlist extends Fragment {
         releaseDate = bundle.getString("releaseDate");
         addingDatetime = bundle.getString("currentTime");
         editText.setText(movieID+","+ movieName+ ","+ releaseDate + ","+ addingDatetime);
-
 
         watchlistViewModel = new ViewModelProvider(this).get(WatchlistViewModel.class);
         watchlistViewModel.initializeVars(getActivity().getApplication());
@@ -99,8 +103,32 @@ public class Watchlist extends Fragment {
             deleteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    watchlistViewModel.deleteAll();
-                    textView_delete.setText("All data was deleted");
+                    LayoutInflater li = LayoutInflater.from(getActivity());
+                    final View promptsView = li.inflate(R.layout.comfirmdelete,null);
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                            getActivity());
+                    alertDialogBuilder.setView(promptsView);
+                    alertDialogBuilder
+                            .setCancelable(false)
+                            .setPositiveButton("OK",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog,int id) {
+                                            watchlistViewModel.deleteAll();
+                                            textView_delete.setText("All data was deleted");
+                                        }
+                                    })
+                            .setNegativeButton("Cancel",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog,int id) {
+                                            dialog.cancel();
+                                        }
+                                    });
+
+                    // create alert dialog
+                    AlertDialog alertDialog = alertDialogBuilder.create();
+                    // show it
+                    alertDialog.show();
+
                 }
             });
 
