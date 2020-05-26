@@ -52,6 +52,7 @@ public class MovieSearch extends Fragment {
             @Override
             public void onClick(View v) {
                 searchInput = searchInputField.getText().toString();
+                //search input field validation
                 if (searchInput.isEmpty()){
                     searchInputField.setError("search could not be empty");
                     Toast.makeText(getActivity(),"please check your input of search",Toast.LENGTH_SHORT).show();
@@ -60,7 +61,7 @@ public class MovieSearch extends Fragment {
             }
         });
         return view;    }
-        //search move from API
+        //search movie from API
         private class searchAsyncTask extends AsyncTask<String,Void,String>{
 
             @Override
@@ -85,9 +86,11 @@ public class MovieSearch extends Fragment {
                     HashMap<String,Object> map = new HashMap<>();
                     map.put("Movie Name",resultList.get(i));
                     map.put("Release Date",resultList.get(i+1));
+                    //get image url from the api
                     String imgURL = "https://image.tmdb.org/t/p/w600_and_h900_bestv2/" + resultList.get(i+2);
                     map.put("movieID",resultList.get(i+3));
                     Bitmap bitmap;
+                    //transfer the image into bitmap
                     try {
                         URL url = new URL(imgURL);
                         InputStream inputStream = url.openStream();
