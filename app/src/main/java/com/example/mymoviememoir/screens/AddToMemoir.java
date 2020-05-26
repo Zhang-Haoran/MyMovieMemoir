@@ -134,7 +134,7 @@ public class AddToMemoir extends Fragment {
                             min = String.valueOf(hourOfDay);
                         }
                         time.append(hour+":"+min+":00");
-                        watchedTime = "1970-01-01T"+time+"+10:00";
+                        watchedTime = "2020-01-01T"+time+"+10:00";
                         watchtimeInputField.setText(watchedTime);
                     }
                 },hour,minute,true);
@@ -194,7 +194,7 @@ public class AddToMemoir extends Fragment {
             @Override
             public void onClick(View v) {
                String rDate = releaseDate+ "T00:00:00+10:00";
-                Memoirtable memoirtable = new Memoirtable(101,movieName,rDate,watchedDate,watchedTime,commentTextview.getText().toString(),String.valueOf (ratingBar.getRating()),cinematable,Home.usertable);
+                Memoirtable memoirtable = new Memoirtable(Integer.parseInt(movieID),movieName,rDate,watchedDate,watchedTime,commentTextview.getText().toString(), String.valueOf(ratingBar.getRating()),cinematable,Home.usertable);
                 new postMemoirAsyncTask().execute(memoirtable);
            }
         });
